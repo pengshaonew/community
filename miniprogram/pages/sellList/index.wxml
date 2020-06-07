@@ -1,0 +1,13 @@
+<!--pages/sell/index.wxml-->
+<block wx:for="{{dataList}}" wx:key="_id">
+    <view class="listItem">
+        <view class="listItem_L">
+            <image src="{{item.mainUrl}}"></image>
+        </view>
+        <view class="listItem_R">
+            <view class="listItem_R_title">{{item.title}}</view>
+            <view class="listItem_R_desc">{{item.desc}}</view>
+            <view class="listItem_R_price">￥{{item.price}}元/平米</view>
+        </view>
+    </view>
+</block>

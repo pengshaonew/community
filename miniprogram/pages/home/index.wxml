@@ -1,0 +1,41 @@
+<!--index.wxml-->
+<view class="container">
+
+	<!--banner部分-->
+	<view class='banner'>
+		<image src="../../images/banner.jpg" />
+	</view>
+
+	<view class="nav">
+		<view class="{{navIndex==='0' ? 'navItem navItemSelected' : 'navItem'}}" data-index="0" bindtap="clickNav">出售</view>
+		<view class="{{navIndex==='1' ? 'navItem navItemSelected' : 'navItem'}}" data-index="1" bindtap="clickNav">出租</view>
+		<view class="{{navIndex==='2' ? 'navItem navItemSelected' : 'navItem'}}" data-index="2" bindtap="clickNav">其他</view>
+	</view>
+
+	<block wx:for="{{dataList}}" wx:key="_id" wx:if="{{navIndex==='0'}}">
+		<view class="listItem">
+			<view class="listItem_L">
+				<image src="{{item.mainUrl}}"></image>
+			</view>
+			<view class="listItem_R">
+				<view class="listItem_R_title">{{item.title}}</view>
+				<view class="listItem_R_desc">{{item.desc}}</view>
+				<view class="listItem_R_price">￥{{item.price}}元/平米</view>
+			</view>
+		</view>
+	</block>
+	<view wx:if="{{navIndex !== '0'}}" class="other">
+		<image src='../../images/notAvailable.png'></image>
+	</view>
+
+
+	<view class="userList" wx:if="{{false}}">
+		<block wx:for="{{userDataList}}" wx:key="_id">
+			<view class="userItem">
+				<image src="{{item.avatarUrl}}"></image>
+				<text>{{item.nickName}}</text>
+				<text>删除</text>
+			</view>
+		</block>
+	</view>
+</view>

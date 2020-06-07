@@ -1,0 +1,52 @@
+/* pages/userInfo/index.wxss */
+.userInfo_header{
+    display: flex;
+    height: 200rpx;
+    align-items: center;
+    background: #fff;
+    margin-bottom:20rpx;
+    padding:0 40rpx;
+}
+.userInfo_header image{
+    width:120rpx;
+    height:120rpx;
+    border-radius: 50%;
+}
+.userInfo_header text{
+    font-size:28rpx;
+    color:#333;
+    margin-left:20rpx;
+}
+
+.list{
+    background:#fff;
+}
+
+.listItem{
+    height:100rpx;
+    display: flex;
+    align-items: center;
+    padding:0 20rpx;
+    border-bottom:1rpx solid rgb(241, 241, 241);
+}
+
+.listItem:last-child{
+    border:none;
+}
+
+.listItem >image{
+    width:50rpx;
+    height:50rpx;
+    margin-right:20rpx;
+}
+
+.loginBtn{
+  background:transparent;
+  font-size:28rpx;
+  margin-left:0!important;
+  width:160rpx;
+  padding:0;
+  display: flex;
+  align-items: center;
+  color:#333;
+}

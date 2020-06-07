@@ -1,0 +1,22 @@
+<!--pages/userInfo/index.wxml-->
+<view>
+    <view class="userInfo_header">
+        <image src="{{avatarUrl}}"></image>
+	 	<button 
+			class="loginBtn" 
+			open-type="getUserInfo" 
+			bindgetuserinfo="getUserInfo" 
+            wx:if="{{isShowLogin}}"
+		 >	
+		 	点击登录
+		</button>
+        <text wx:if="{{!isShowLogin}}">{{nickName}}</text>
+    </view>
+    <!-- <view class="list">
+        <view class="listItem">
+            <image src='../../images/publishIcon.png'></image>
+            <text>我的发布</text>
+        </view>
+    </view> -->
+    
+</view>
