@@ -1,5 +1,4 @@
-// pages/sell/index.js
-
+// pages/houseDetail/index.js
 const db = wx.cloud.database();
 const _ = db.command;
 const sellList = db.collection('sellList');
@@ -10,15 +9,14 @@ Page({
      * 页面的初始数据
      */
     data: {
-        dataList: []
+        houseInfo: {}
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
-        // 获取列表数据
-        this.getSellData();
+    onLoad: function (option) {
+        this.getSellData(option.id);
     },
 
     /**
@@ -43,16 +41,25 @@ Page({
     },
 
     /**
-     * 生命周期函数--监听页面卸载
+     * 用户点击右上角分享
      */
-    onUnload: function () {
+    onShareAppMessage: function () {
 
     },
-    getSellData: function () {
+    getSellData: function (id) {
         sellList.where({
-            status: _.eq('THROUGH')
+            _id: _.eq(id)
         }).get().then(res => {
-            this.setData({dataList: res.data});
+            console.log(res);
+            this.setData({
+                houseInfo:res.data[0]
+            })
         })
     },
+    callPhone(e){
+        let phone = e.target.dataset.phone;
+        wx.makePhoneCall({
+            phoneNumber: phone
+        })
+    }
 })

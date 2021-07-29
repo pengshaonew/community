@@ -1,5 +1,4 @@
-// pages/sell/index.js
-
+// pages/myPublish/index.js
 const db = wx.cloud.database();
 const _ = db.command;
 const sellList = db.collection('sellList');
@@ -10,14 +9,13 @@ Page({
      * 页面的初始数据
      */
     data: {
-        dataList: []
+        dataList:{}
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        // 获取列表数据
         this.getSellData();
     },
 
@@ -29,30 +27,32 @@ Page({
     },
 
     /**
-     * 生命周期函数--监听页面显示
+     * 页面相关事件处理函数--监听用户下拉动作
      */
-    onShow: function () {
+    onPullDownRefresh: function () {
 
     },
 
     /**
-     * 生命周期函数--监听页面隐藏
+     * 页面上拉触底事件的处理函数
      */
-    onHide: function () {
+    onReachBottom: function () {
 
     },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-    getSellData: function () {
+    // 获取列表数据
+    getSellData() {
+        const openId = wx.getStorageSync('openId');
         sellList.where({
-            status: _.eq('THROUGH')
+            openId: _.eq(openId)
         }).get().then(res => {
             this.setData({dataList: res.data});
         })
     },
+
+    goDetail(e){
+        const id = e.target.dataset.id;
+        wx.navigateTo({
+            url:'/pages/houseDetail/index?id='+id
+        })
+    }
 })

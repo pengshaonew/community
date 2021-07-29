@@ -11,62 +11,82 @@ Page({
      * 页面的初始数据
      */
     data: {
-        avatarUrl:'../../images/defaultHeader.png',
-        nickName:'邻居',
-        isShowLogin:true
+        avatarUrl: '../../images/defaultHeader.png',
+        nickName: '邻居',
+        isLogin: false
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.setData({
-            isShowLogin: false,
-            avatarUrl:globalData.avatarUrl,
-            nickName: globalData.nickName
-        })
-    },
-
-    getUserInfo: function(e){
-      this.onGetOpenid(e.detail.userInfo);
-    },
-
-    onGetOpenid: function(userInfo) {
-      // 调用云函数
-      wx.cloud.callFunction({
-        name: 'login',
-        data: {},
-        success: res => {
-          // console.log('[云函数] [login] user openid: ', res.result.openid);
-            app.globalData.openid = res.result.openid;
-            app.globalData.avatarUrl = userInfo.avatarUrl;
-            app.globalData.nickName = userInfo.nickName;
+        const avatarUrl = wx.getStorageSync('avatarUrl');
+        const nickName = wx.getStorageSync('nickName');
+        if (nickName) {
             this.setData({
-                isShowLogin: false,
-                avatarUrl:globalData.avatarUrl,
-                nickName: globalData.nickName
-            });
-          users.where({
-            _openid: _.neq(res.result.openid)
-          }).get().then(result=>{
-            if(!result.data.length){
-              users.add({
-                data: {
-                  avatarUrl:userInfo.avatarUrl,
-                  nickName:userInfo.nickName
-                }
-              })
-              .then(res => {
-                console.log(res);
-              })
-            }
-          });
-          
-        },
-        fail: err => {
-          console.error('[云函数] [login] 调用失败', err)
+                isLogin: true,
+                avatarUrl,
+                nickName
+            })
         }
-      })
+    },
+
+    getUserInfo: function (e) {
+        this.setData({
+            isLogin: true
+        })
+        this.onGetOpenid(e.detail.userInfo);
+    },
+
+    onGetOpenid: function (userInfo) {
+        // 调用云函数
+        wx.cloud.callFunction({
+            name: 'login',
+            data: {},
+            success: res => {
+                // console.log('[云函数] [login] user openId: ', res.result.openId);
+                const openId = res.result.openId;
+                const avatarUrl = userInfo.avatarUrl;
+                const nickName = userInfo.nickName;
+                wx.setStorage({
+                    key: 'avatarUrl',
+                    data: avatarUrl
+                });
+                wx.setStorage({
+                    key: 'nickName',
+                    data: nickName
+                });
+                wx.setStorage({
+                    key: 'openId',
+                    data: openId
+                });
+                this.setData({
+                    isLogin: true,
+                    avatarUrl,
+                    nickName
+                });
+                users.where({
+                    _openid: _.neq(openId)
+                }).get().then(result => {
+                    if (!result.data.length) {
+                        users.add({
+                            data: {
+                                avatarUrl,
+                                nickName,
+                                openId,
+                            }
+                        })
+                            .then(res => {
+                                console.log(res);
+                            })
+                    }
+                });
+
+            },
+            fail: err => {
+                console.error('[云函数] [login] 调用失败', err)
+            }
+        })
     },
 
     /**

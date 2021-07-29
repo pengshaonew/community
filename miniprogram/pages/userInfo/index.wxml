@@ -2,21 +2,25 @@
 <view>
     <view class="userInfo_header">
         <image src="{{avatarUrl}}"></image>
-	 	<button 
-			class="loginBtn" 
-			open-type="getUserInfo" 
-			bindgetuserinfo="getUserInfo" 
-            wx:if="{{isShowLogin}}"
-		 >	
-		 	点击登录
-		</button>
-        <text wx:if="{{!isShowLogin}}">{{nickName}}</text>
+        <button
+                class="loginBtn"
+                open-type="getUserInfo"
+                bindgetuserinfo="getUserInfo"
+                wx:if="{{!isLogin}}"
+        >
+            点击登录
+        </button>
+        <text wx:if="{{isLogin}}">{{nickName}}</text>
     </view>
-    <!-- <view class="list">
+    <view class="list" wx:if="{{isLogin}}">
         <view class="listItem">
-            <image src='../../images/publishIcon.png'></image>
+            <image src='../../images/publishIcon.png' />
             <text>我的发布</text>
         </view>
-    </view> -->
-    
+        <view class="listItem">
+            <image src='../../images/publishIcon.png' />
+            <text>待审核</text>
+        </view>
+    </view>
+
 </view>

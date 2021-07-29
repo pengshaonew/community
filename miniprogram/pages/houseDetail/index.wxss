@@ -1,0 +1,42 @@
+/* pages/houseDetail/index.wxss */
+
+.maninUrl {
+    width: 100%;
+}
+
+.main {
+    padding: 20rpx 40rpx;
+}
+
+.title {
+    font-size: 42rpx;
+    color: #333;
+    height: 64rpx;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20rpx;
+}
+
+.item {
+    font-size: 28rpx;
+    color: #676565;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20rpx;
+}
+
+.item text{
+    color: red;
+}
+
+.phone {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.phone .phoneBtn {
+    background: #0d9bff;
+    padding: 20rpx 40rpx;
+    border-radius: 8rpx;
+    color: #fff;
+}

@@ -8,14 +8,14 @@
 
 	<view class="nav">
 		<view class="{{navIndex==='0' ? 'navItem navItemSelected' : 'navItem'}}" data-index="0" bindtap="clickNav">出售</view>
-		<view class="{{navIndex==='1' ? 'navItem navItemSelected' : 'navItem'}}" data-index="1" bindtap="clickNav">出租</view>
+<!--		<view class="{{navIndex==='1' ? 'navItem navItemSelected' : 'navItem'}}" data-index="1" bindtap="clickNav">出租</view>-->
 		<view class="{{navIndex==='2' ? 'navItem navItemSelected' : 'navItem'}}" data-index="2" bindtap="clickNav">其他</view>
 	</view>
 
 	<block wx:for="{{dataList}}" wx:key="_id" wx:if="{{navIndex==='0'}}">
 		<view class="listItem">
 			<view class="listItem_L">
-				<image src="{{item.mainUrl}}"></image>
+				<image src="{{item.mainUrl}}" data-id="{{item._id}}" bindtap="goDetail"/>
 			</view>
 			<view class="listItem_R">
 				<view class="listItem_R_title">{{item.title}}</view>

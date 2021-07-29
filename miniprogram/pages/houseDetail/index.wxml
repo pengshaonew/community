@@ -1,0 +1,13 @@
+<!--pages/houseDetail/index.wxml-->
+<view class="houseDetail">
+    <image src="{{houseInfo.mainUrl}}" class="maninUrl" />
+    <view class="main">
+        <view class="title">{{houseInfo.title}}</view>
+        <view class="item area">建筑面积：<text>{{houseInfo.area}}</text></view>
+        <view class="item price">参考价格：<text>{{houseInfo.price}}/平米</text></view>
+        <view class="item contact">联系人：{{houseInfo.contact || '暂无'}}</view>
+        <view class="item phone">
+            <text bindtap="callPhone" data-phone="{{houseInfo.phone}}" class="phoneBtn">免费致电</text>
+        </view>
+    </view>
+</view>

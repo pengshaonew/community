@@ -1,0 +1,12 @@
+<!--pages/myPublish/index.wxml-->
+<view class="page">
+    <block wx:for="{{dataList}}" wx:key="_id">
+        <view class="weui-cells" bindtap="goDetail" data-id="{{item._id}}">
+            <view class="weui-cell weui-cell_active weui-cell_access">
+                <view class="weui-cell__bd">{{item.title}}</view>
+                <view class="weui-cell__ft" style="font-size: 0;">
+                </view>
+            </view>
+        </view>
+    </block>
+</view>
