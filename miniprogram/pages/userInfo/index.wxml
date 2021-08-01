@@ -13,11 +13,11 @@
         <text wx:if="{{isLogin}}">{{nickName}}</text>
     </view>
     <view class="list" wx:if="{{isLogin}}">
-        <view class="listItem">
+        <view class="listItem" bindtap="goMyPublish">
             <image src='../../images/publishIcon.png' />
             <text>我的发布</text>
         </view>
-        <view class="listItem">
+        <view class="listItem" bindtap="goToAudit" wx:if="{{isToAudit}}">
             <image src='../../images/publishIcon.png' />
             <text>待审核</text>
         </view>

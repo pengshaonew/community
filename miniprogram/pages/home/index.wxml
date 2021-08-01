@@ -3,7 +3,7 @@
 
 	<!--banner部分-->
 	<view class='banner'>
-		<image src="../../images/banner.jpg" />
+		<image src="../../images/banner_1.png" />
 	</view>
 
 	<view class="nav">
@@ -15,7 +15,7 @@
 	<block wx:for="{{dataList}}" wx:key="_id" wx:if="{{navIndex==='0'}}">
 		<view class="listItem">
 			<view class="listItem_L">
-				<image src="{{item.mainUrl}}" data-id="{{item._id}}" bindtap="goDetail"/>
+				<image src="../../images/banner_1.png" data-id="{{item._id}}" bindtap="goDetail"/>
 			</view>
 			<view class="listItem_R">
 				<view class="listItem_R_title">{{item.title}}</view>

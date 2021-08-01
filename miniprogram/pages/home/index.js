@@ -14,7 +14,10 @@ Page({
     },
 
     onLoad: function () {
-        this.getSellData();
+        // this.getSellData();
+    },
+    onShow(){
+        this.getSellData()
     },
 
     // 上传图片

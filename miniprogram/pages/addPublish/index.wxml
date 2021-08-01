@@ -1,0 +1,66 @@
+<!--pages/addPublish/index.wxml-->
+<view>
+    <form catchsubmit="handleSubmit">
+        <view class="weui-cells__group weui-cells__group_form">
+            <view class="weui-cells weui-cells_form">
+                <view class="weui-cell weui-cell_active">
+                    <view class="weui-cell__hd">
+                        <label class="weui-label">标题</label>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" placeholder="标题" name="title" />
+                    </view>
+                </view>
+                <view class="weui-cell weui-cell_active">
+                    <view class="weui-cell__hd">
+                        <label class="weui-label">房间号</label>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" placeholder="X号楼X单元X房号" name="roomNumber" />
+                    </view>
+                </view>
+                <view class="weui-cell weui-cell_active">
+                    <view class="weui-cell__hd">
+                        <label class="weui-label">面积</label>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" placeholder="面积" name="area" />
+                    </view>
+                </view>
+                <view class="weui-cell weui-cell_active">
+                    <view class="weui-cell__hd">
+                        <label class="weui-label">价格</label>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" placeholder="价格" name="price" />
+                    </view>
+                </view>
+                <view class="weui-cell weui-cell_active">
+                    <view class="weui-cell__hd">
+                        <label class="weui-label">联系人</label>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" placeholder="联系人" name="owner" />
+                    </view>
+                </view>
+                <view class="weui-cell weui-cell_active">
+                    <view class="weui-cell__hd">
+                        <label class="weui-label">联系方式</label>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" placeholder="联系方式" name="phone" />
+                    </view>
+                </view>
+                <view class="weui-cell weui-cell_active">
+                    <view class="weui-cell__hd">
+                        <label class="weui-label">描述</label>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" placeholder="详细信息" name="desc" />
+                    </view>
+                </view>
+            </view>
+            <button type="primary" formType="submit"  class="weui-btn weui-btn_primary submitBtn">提交审核</button>
+        </view>
+    </form>
+</view>

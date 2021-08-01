@@ -1,9 +1,11 @@
 {
   "pages": [
-    "pages/myPublish/index",
     "pages/home/index",
     "pages/sellList/index",
     "pages/houseDetail/index",
+    "pages/addPublish/index",
+    "pages/myPublish/index",
+    "pages/toAudit/index",
     "pages/userInfo/index"
   ],
   "window": {

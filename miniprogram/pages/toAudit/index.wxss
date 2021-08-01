@@ -1,0 +1,9 @@
+/* pages/toAudit/index.wxss */
+.emptyData{
+    text-align: center;
+    margin-top: 100rpx;
+}
+.emptyData image{
+    width:240rpx;
+    height:360rpx;
+}

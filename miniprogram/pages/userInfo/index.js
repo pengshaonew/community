@@ -13,7 +13,8 @@ Page({
     data: {
         avatarUrl: '../../images/defaultHeader.png',
         nickName: '邻居',
-        isLogin: false
+        isLogin: false,
+        isToAudit:false
     },
 
     /**
@@ -22,8 +23,10 @@ Page({
     onLoad: function (options) {
         const avatarUrl = wx.getStorageSync('avatarUrl');
         const nickName = wx.getStorageSync('nickName');
+        const openId = wx.getStorageSync('openId');
         if (nickName) {
             this.setData({
+                isToAudit: openId === 'oPpIh5c7GikfzgDoiT4Ig3aPKSUs',
                 isLogin: true,
                 avatarUrl,
                 nickName
@@ -45,7 +48,7 @@ Page({
             data: {},
             success: res => {
                 // console.log('[云函数] [login] user openId: ', res.result.openId);
-                const openId = res.result.openId;
+                const openId = res.result.openid;
                 const avatarUrl = userInfo.avatarUrl;
                 const nickName = userInfo.nickName;
                 wx.setStorage({
@@ -61,6 +64,7 @@ Page({
                     data: openId
                 });
                 this.setData({
+                    isToAudit: openId === 'oPpIh5c7GikfzgDoiT4Ig3aPKSUs',
                     isLogin: true,
                     avatarUrl,
                     nickName
@@ -96,45 +100,14 @@ Page({
 
     },
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
+    goMyPublish(){
+        wx.navigateTo({
+            url:'/pages/myPublish/index'
+        })
     },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
+    goToAudit(){
+        wx.navigateTo({
+            url:'/pages/toAudit/index'
+        })
     }
 })

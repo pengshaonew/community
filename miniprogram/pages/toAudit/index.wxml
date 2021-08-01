@@ -1,0 +1,15 @@
+<!--pages/toAudit/index.wxml-->
+<view class="weui-cells weui-cells_after-title" wx:if="{{dataList.length}}">
+    <block wx:for="{{dataList}}" wx:key="_id">
+        <navigator url="{{'/pages/houseDetail/index?isToAudit=1&id=' + item._id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">{{item.title || item.roomNumber}}</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access status">
+
+            </view>
+        </navigator>
+    </block>
+</view>
+
+<view wx:if="{{!dataList.length}}" class="emptyData">
+    <image src='../../images/notAvailable.png' />
+</view>

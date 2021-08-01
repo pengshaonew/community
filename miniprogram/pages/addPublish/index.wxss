@@ -1,0 +1,5 @@
+/* pages/addPublish/index.wxss */
+
+.submitBtn{
+    margin-top:20rpx;
+}

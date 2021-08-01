@@ -25,20 +25,6 @@ Page({
     onReady: function () {
 
     },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
     // 获取列表数据
     getSellData() {
         const openId = wx.getStorageSync('openId');
@@ -53,6 +39,11 @@ Page({
         const id = e.target.dataset.id;
         wx.navigateTo({
             url:'/pages/houseDetail/index?id='+id
+        })
+    },
+    goPublish(){
+        wx.redirectTo({
+            url:'/pages/addPublish/index'
         })
     }
 })
