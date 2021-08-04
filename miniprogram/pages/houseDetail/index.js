@@ -13,12 +13,12 @@ Page({
         houseInfo: {}
     },
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
     onLoad: function (option) {
+        const openId = wx.getStorageSync('openId');
         this.setData({
-            isToAudit: option.isToAudit
+            openId,
+            isToAudit: option.isToAudit,
+            isDelBtn: openId === 'oPpIh5c7GikfzgDoiT4Ig3aPKSUs'
         })
         this.getSellData(option.id);
     },
@@ -33,10 +33,28 @@ Page({
                 id
             },
         }).then(res => {
-            console.log(36, res.result);
-            if(res && res.result && res.result.stats && res.result.stats.updated === 1){
+            console.log(res);
+            if (res && res.result && res.result.stats && res.result.stats.updated === 1) {
                 wx.redirectTo({
-                    url: '/pages/home/index'
+                    url: '/pages/toAudit/index'
+                })
+            }
+        }).catch(console.error)
+    },
+    handleDel() {
+        const {houseInfo} = this.data;
+        let id = houseInfo._id;
+        wx.cloud.callFunction({
+            // 云函数名称
+            name: 'delHouseInfo',
+            // 传给云函数的参数
+            data: {
+                id
+            },
+        }).then(res => {
+            if (res && res.result && res.result.stats && res.result.stats.removed === 1) {
+                wx.redirectTo({
+                    url: '/pages/myPublish/index'
                 })
             }
         }).catch(console.error)
