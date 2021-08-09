@@ -13,9 +13,6 @@ Page({
         navIndex: "0"
     },
 
-    onLoad: function () {
-        // this.getSellData();
-    },
     onShow(){
         this.getSellData()
     },
@@ -96,6 +93,29 @@ Page({
         const id = e.target.dataset.id;
         wx.navigateTo({
             url:'/pages/houseDetail/index?id='+id
+        })
+    },
+    sendMsg(){
+        wx.cloud.callFunction({
+            // 云函数名称
+            name: 'sendNotice',
+            // 传给云函数的参数
+            data: {
+                content:'通知消息测试'
+            },
+        }).then(res => {
+            console.log(res);
+            if (res && res.result && res.result.stats && res.result.stats.updated === 1) {
+                wx.redirectTo({
+                    url: '/pages/toAudit/index'
+                })
+            }
+        }).catch(console.error)
+    },
+    msgSubscribe(){
+        wx.requestSubscribeMessage({
+            tmplIds: ['8Mc3G7Lq3c1SZvTf5q2dLd2jLKDH6EVrl9Oa5PRFCXE'],
+            success (res) { }
         })
     }
 })

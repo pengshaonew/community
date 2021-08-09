@@ -29,14 +29,14 @@
       "outputPath": ""
     },
     "enableEngineNative": false,
-    "useIsolateContext": true,
+    "useIsolateContext": false,
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
     "minifyWXSS": true,
     "showES6CompileOption": false
   },
-  "appid": "wxd6218a6861ed2f3c",
+  "appid": "wx4237513ad327e8d9",
   "projectname": "community",
   "libVersion": "2.8.1",
   "simulatorType": "wechat",

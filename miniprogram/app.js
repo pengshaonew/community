@@ -10,7 +10,7 @@ App({
         //   此处请填入环境 ID, 环境 ID 可打开云控制台查看
         //   如不填则使用默认环境（第一个创建的环境）
         // env: 'room-q4ke9',
-        env: 'room-q4ke9',
+        env: 'product-6gmyj2bv28878f63',
         traceUser: true,
       })
     }
