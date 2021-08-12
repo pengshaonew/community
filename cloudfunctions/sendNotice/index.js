@@ -10,14 +10,25 @@ cloud.init({
 exports.main = async (event, context) => {
   try {
     const result = await cloud.openapi.subscribeMessage.send({
-      "touser": 'oPpIh5c7GikfzgDoiT4Ig3aPKSUs',
-      "templateId": '8Mc3G7Lq3c1SZvTf5q2dLd2jLKDH6EVrl9Oa5PRFCXE',
+      "touser": "oxRJz5TIAWcLxkbJGq1grap0ZpPk",
+      "templateId": "mmChUuo0gQCk5geTc22116m9n4FLaXCH19GMO7TncNs",
+      "page": 'index',
+      "lang": 'zh_CN',
       "data": {
-        "thing7": "楼层",
-        "thing8": "申请人",
-        "time10": "日期",
-        "time3": "时间",
-      }
+        "thing10": {
+          value:"楼层"
+        },
+        "thing2": {
+          "value": "2015年01月05日"
+        },
+        "date4": {
+          "value": "2015年01月05日"
+        },
+        "character_string11": {
+          "value": "XSDD-20210519-0014"
+        },
+      },
+      "miniprogramState": 'developer'
     })
     return result
   } catch (err) {

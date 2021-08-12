@@ -18,7 +18,7 @@ Page({
         this.setData({
             openId,
             isToAudit: option.isToAudit,
-            isDelBtn: openId === 'oPpIh5c7GikfzgDoiT4Ig3aPKSUs'
+            isDelBtn: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk'
         })
         this.getSellData(option.id);
     },

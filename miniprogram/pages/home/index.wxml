@@ -1,7 +1,5 @@
 <!--index.wxml-->
 <view class="container">
-	<button bindtap="sendMsg">测试消息</button>
-	<button bindtap="msgSubscribe">订阅消息</button>
 	<!--banner部分-->
 	<view class='banner'>
 		<image src="../../images/banner_1.png" />

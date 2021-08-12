@@ -26,7 +26,7 @@ Page({
         const openId = wx.getStorageSync('openId');
         if (nickName) {
             this.setData({
-                isToAudit: openId === 'oPpIh5c7GikfzgDoiT4Ig3aPKSUs',
+                isToAudit: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk',
                 isLogin: true,
                 avatarUrl,
                 nickName
@@ -42,6 +42,7 @@ Page({
     },
 
     onGetOpenid: function (userInfo) {
+        console.log(userInfo);
         // 调用云函数
         wx.cloud.callFunction({
             name: 'login',
@@ -64,7 +65,7 @@ Page({
                     data: openId
                 });
                 this.setData({
-                    isToAudit: openId === 'oPpIh5c7GikfzgDoiT4Ig3aPKSUs',
+                    isToAudit: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk',
                     isLogin: true,
                     avatarUrl,
                     nickName
@@ -93,13 +94,6 @@ Page({
         })
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
     goMyPublish(){
         wx.navigateTo({
             url:'/pages/myPublish/index'
@@ -108,6 +102,32 @@ Page({
     goToAudit(){
         wx.navigateTo({
             url:'/pages/toAudit/index'
+        })
+    },
+    sendMsg(){
+        wx.cloud.callFunction({
+            // 云函数名称
+            name: 'sendNotice',
+            // 传给云函数的参数
+            data: {
+                content:'通知消息测试'
+            },
+        }).then(res => {
+            console.log(107, res);
+        }).catch(console.error)
+    },
+    msgSubscribe(){
+        wx.requestSubscribeMessage({
+            tmplIds: ['mmChUuo0gQCk5geTc22116m9n4FLaXCH19GMO7TncNs'],
+            success (res) {
+                console.log(res)
+             },
+             fail(res){
+                 console.log('fail',res)
+             },
+             complete(){
+                 console.log('complete')
+             }
         })
     }
 })
