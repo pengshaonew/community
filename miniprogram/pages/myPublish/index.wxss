@@ -2,3 +2,6 @@
 .status {
     font-size: 26rpx;
 }
+.goPublish{
+    font-size:30rpx;
+}

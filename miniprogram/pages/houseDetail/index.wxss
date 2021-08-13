@@ -40,3 +40,10 @@
     border-radius: 8rpx;
     color: #fff;
 }
+
+.handleDel {
+    font-size:32rpx;
+}
+.handleStatus{
+    font-size:32rpx;
+}

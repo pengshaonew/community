@@ -14,13 +14,20 @@ Page({
         avatarUrl: '../../images/defaultHeader.png',
         nickName: '邻居',
         isLogin: false,
-        isToAudit:false
+        isToAudit:false,
+        canIUseGetUserProfile: false
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        if (wx.getUserProfile) {
+            this.setData({
+              canIUseGetUserProfile: true
+            })
+          }
+
         const avatarUrl = wx.getStorageSync('avatarUrl');
         const nickName = wx.getStorageSync('nickName');
         const openId = wx.getStorageSync('openId');
@@ -34,11 +41,18 @@ Page({
         }
     },
 
-    getUserInfo: function (e) {
-        this.setData({
-            isLogin: true
-        })
-        this.onGetOpenid(e.detail.userInfo);
+    getUserProfile: function (e) {
+        console.log(1);
+        wx.getUserProfile({
+            desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+            success: (res) => {
+              this.setData({
+                userInfo: res.userInfo,
+                isLogin: true
+              })
+              this.onGetOpenid(res.userInfo);
+            }
+          })
     },
 
     onGetOpenid: function (userInfo) {

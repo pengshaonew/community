@@ -2,4 +2,8 @@
 
 .submitBtn{
     margin-top:20rpx;
+    font-size:28rpx;
+}
+.weui-cells{
+    font-size:30rpx;
 }

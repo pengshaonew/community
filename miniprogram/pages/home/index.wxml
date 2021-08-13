@@ -5,21 +5,21 @@
 		<image src="../../images/banner_1.png" />
 	</view>
 
-	<view class="nav">
+	<view class="nav" wx:if="{{false}}">
 		<view class="{{navIndex==='0' ? 'navItem navItemSelected' : 'navItem'}}" data-index="0" bindtap="clickNav">租售</view>
 <!--		<view class="{{navIndex==='1' ? 'navItem navItemSelected' : 'navItem'}}" data-index="1" bindtap="clickNav">出租</view>-->
 		<view class="{{navIndex==='2' ? 'navItem navItemSelected' : 'navItem'}}" data-index="2" bindtap="clickNav">其他</view>
 	</view>
 
 	<block wx:for="{{dataList}}" wx:key="_id" wx:if="{{navIndex==='0'}}">
-		<view class="listItem">
+		<view class="listItem" bindtap="goDetail">
 			<view class="listItem_L">
-				<image src="../../images/banner_1.png" data-id="{{item._id}}" bindtap="goDetail"/>
+				<image src="../../images/banner_1.png" data-id="{{item._id}}"/>
 			</view>
 			<view class="listItem_R">
-				<view class="listItem_R_title">{{item.title}}</view>
-				<view class="listItem_R_desc">{{item.roomNumber}}</view>
-				<view class="listItem_R_price">{{item.price ? item.price + '元/平米' : '面议'}}</view>
+				<view class="listItem_R_title" data-id="{{item._id}}">{{item.title}}</view>
+				<view class="listItem_R_desc" data-id="{{item._id}}">{{item.roomNumber}}</view>
+				<view class="listItem_R_price" data-id="{{item._id}}">{{item.price ? item.price + '元/平米' : '面议'}}</view>
 			</view>
 		</view>
 	</block>

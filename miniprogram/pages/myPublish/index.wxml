@@ -1,7 +1,7 @@
 <!--pages/myPublish/index.wxml-->
 <view class="page">
     <view>
-        <text class="weui-btn_cell weui-btn_cell-default" bindtap="goPublish">去发布</text>
+        <text class="weui-btn_cell weui-btn_cell-default goPublish" bindtap="goPublish">去发布</text>
     </view>
     <view class="weui-cells weui-cells_after-title">
         <block wx:for="{{dataList}}" wx:key="_id">
