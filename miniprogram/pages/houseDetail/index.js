@@ -22,6 +22,22 @@ Page({
         })
         this.getSellData(option.id);
     },
+    
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function () {
+        return {
+            title:'水云间',
+            path:'/pages/home/index',
+            imageUrl:'../../images/banner.jpg'
+        }
+    },
+    onShareTimeline:function(){
+        return {
+            title:'水云间'  
+        }
+    },
     handleStatus() {
         const {houseInfo} = this.data;
         let id = houseInfo._id;

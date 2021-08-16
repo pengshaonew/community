@@ -17,6 +17,21 @@ Page({
         this.getSellData()
     },
 
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function () {
+        return {
+            title:'水云间',
+            path:'/pages/home/index',
+            imageUrl:'../../images/banner.jpg'
+        }
+    },
+    onShareTimeline:function(){
+        return {
+            title:'水云间'  
+        }
+    },
     // 上传图片
     doUpload: function () {
         // 选择图片
