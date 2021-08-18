@@ -5,10 +5,10 @@
 		<image src="../../images/banner_1.png" />
 	</view>
 
-	<view class="nav" wx:if="{{false}}">
+	<view class="nav">
 		<view class="{{navIndex==='0' ? 'navItem navItemSelected' : 'navItem'}}" data-index="0" bindtap="clickNav">租售</view>
 <!--		<view class="{{navIndex==='1' ? 'navItem navItemSelected' : 'navItem'}}" data-index="1" bindtap="clickNav">出租</view>-->
-		<view class="{{navIndex==='2' ? 'navItem navItemSelected' : 'navItem'}}" data-index="2" bindtap="clickNav">其他</view>
+		<view class="{{navIndex==='2' ? 'navItem navItemSelected' : 'navItem'}}" data-index="2" bindtap="clickNav">公告</view>
 	</view>
 
 	<block wx:for="{{dataList}}" wx:key="_id" wx:if="{{navIndex==='0'}}">

@@ -24,7 +24,7 @@ Page({
         return {
             title:'水云间',
             path:'/pages/home/index',
-            imageUrl:'../../images/banner.jpg'
+            imageUrl:'../../images/banner_1.png'
         }
     },
     onShareTimeline:function(){
