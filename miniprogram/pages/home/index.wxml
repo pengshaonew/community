@@ -23,8 +23,9 @@
 			</view>
 		</view>
 	</block>
-	<view wx:if="{{navIndex !== '0'}}" class="other">
-		<image src='../../images/notAvailable.png'></image>
+	<view wx:if="{{navIndex === '2'}}" class="other">
+		<rich-text nodes="{{publishContent}}"></rich-text>
+<!--		<image src='../../images/notAvailable.png'></image>-->
 	</view>
 
 

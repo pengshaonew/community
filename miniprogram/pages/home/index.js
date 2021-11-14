@@ -3,6 +3,7 @@ const app = getApp()
 const db = wx.cloud.database();
 const _ = db.command;
 const sellList = db.collection('sellList');
+const publish = db.collection('proclamation');
 const users = db.collection('users');
 Page({
     data: {
@@ -10,11 +11,13 @@ Page({
         userInfo: {},
         userDataList: [],
         dataList: [],
-        navIndex: "0"
+        navIndex: "0",
+        publishContent:''
     },
 
     onShow(){
-        this.getSellData()
+        this.getSellData();
+        this.getPublishData();
     },
 
     /**
@@ -96,11 +99,21 @@ Page({
         });
     },
 
+    // 租房列表
     getSellData: function () {
         sellList.where({
             status: _.eq('THROUGH')
         }).get().then(res => {
             this.setData({dataList: res.data});
+        })
+    },
+
+    // 租房列表
+    getPublishData: function () {
+        publish.where({}).get().then(res => {
+            console.log(res.data[0].content);
+            let content = res.data[0].content;
+            this.setData({publishContent: content});
         })
     },
 
