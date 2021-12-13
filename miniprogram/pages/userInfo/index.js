@@ -118,6 +118,11 @@ Page({
             url:'/pages/toAudit/index'
         })
     },
+    goProclamation(){
+        wx.navigateTo({
+            url:'/pages/proclamation/index'
+        })
+    },
     sendMsg(){
         wx.cloud.callFunction({
             // 云函数名称

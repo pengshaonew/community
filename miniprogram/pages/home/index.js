@@ -108,10 +108,9 @@ Page({
         })
     },
 
-    // 租房列表
+    // 公告
     getPublishData: function () {
         publish.where({}).get().then(res => {
-            console.log(res.data[0].content);
             let content = res.data[0].content;
             this.setData({publishContent: content});
         })
