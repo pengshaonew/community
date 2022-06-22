@@ -54,6 +54,7 @@ Page({
         sellList.add({
             data: {
                 ...values,
+                createTime: Date.now(),
                 status: 'TO_AUDIT',
                 openId: wx.getStorageSync('openId'),
                 nickName: wx.getStorageSync('nickName'),

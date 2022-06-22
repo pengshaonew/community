@@ -103,7 +103,7 @@ Page({
     getSellData: function () {
         sellList.where({
             status: _.eq('THROUGH')
-        }).get().then(res => {
+        }).orderBy('createTime', 'desc').get().then(res => {
             this.setData({dataList: res.data});
         })
     },
