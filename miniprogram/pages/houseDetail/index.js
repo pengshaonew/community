@@ -2,6 +2,7 @@
 const db = wx.cloud.database();
 const _ = db.command;
 const sellList = db.collection('sellList');
+const users = db.collection('users');
 
 Page({
 
@@ -10,7 +11,8 @@ Page({
      */
     data: {
         isToAudit: null,
-        houseInfo: {}
+        houseInfo: {},
+        openId:null
     },
 
     onLoad: function (option) {
@@ -84,10 +86,73 @@ Page({
             })
         })
     },
-    callPhone(e) {
-        let phone = e.target.dataset.phone;
+    callPhone() {
         wx.makePhoneCall({
-            phoneNumber: phone
+            phoneNumber: this.data.houseInfo.phone
         })
-    }
+    },
+    getUserProfile: function (e) {
+        wx.getUserProfile({
+            desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+            success: (res) => {
+                this.setData({
+                    userInfo: res.userInfo,
+                    isLogin: true
+                })
+                this.onGetOpenid(res.userInfo);
+            }
+        })
+    },
+
+    onGetOpenid: function (userInfo) {
+        console.log(userInfo);
+        // 调用云函数
+        wx.cloud.callFunction({
+            name: 'login',
+            data: {},
+            success: res => {
+                // console.log('[云函数] [login] user openId: ', res.result.openId);
+                const openId = res.result.openid;
+                const avatarUrl = userInfo.avatarUrl;
+                const nickName = userInfo.nickName;
+                wx.setStorage({
+                    key: 'avatarUrl',
+                    data: avatarUrl
+                });
+                wx.setStorage({
+                    key: 'nickName',
+                    data: nickName
+                });
+                wx.setStorage({
+                    key: 'openId',
+                    data: openId
+                });
+                this.callPhone();
+                this.setData({
+                    openId,
+                    isDelBtn: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk' || openId === 'oxRJz5S3jhzU9ygdIofXoIXMsMWM'
+                });
+                users.where({
+                    _openid: _.neq(openId)
+                }).get().then(result => {
+                    if (!result.data.length) {
+                        users.add({
+                            data: {
+                                avatarUrl,
+                                nickName,
+                                openId,
+                            }
+                        })
+                            .then(res => {
+                                console.log(res);
+                            })
+                    }
+                });
+
+            },
+            fail: err => {
+                console.error('[云函数] [login] 调用失败', err)
+            }
+        })
+    },
 })

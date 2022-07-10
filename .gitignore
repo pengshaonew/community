@@ -37,3 +37,4 @@ cfg
 /.history
 package-lock.json
 /project.private.config.json
+/cloudfunctions/node_modules/
