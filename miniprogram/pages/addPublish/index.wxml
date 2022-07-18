@@ -32,7 +32,7 @@
                         <label class="weui-label">价格</label>
                     </view>
                     <view class="weui-cell__bd">
-                        <input class="weui-input" placeholder="价格" name="price" />
+                        <input class="weui-input" placeholder="每平米多少元" name="price" />
                     </view>
                 </view>
                 <view class="weui-cell weui-cell_active">

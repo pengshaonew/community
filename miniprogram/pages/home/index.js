@@ -1,4 +1,6 @@
 //index.js
+import QQMapWX from '../../utils/qqmap-wx-jssdk.min.js'
+let qqmapsdk;
 const app = getApp()
 const db = wx.cloud.database();
 const _ = db.command;
@@ -19,7 +21,31 @@ Page({
         this.getSellData();
         this.getPublishData();
     },
-
+    onLoad(){
+        // 实例化API核心类
+        qqmapsdk = new QQMapWX({
+            key: 'FT5BZ-ZG7CV-M22PM-U2RMI-X2IL2-OPFZP'    // 必填
+        });
+        this.checkAuth((latitude, longitude) => {
+            // https://lbs.qq.com/qqmap_wx_jssdk/method-reverseGeocoder.html
+            qqmapsdk.reverseGeocoder({
+                sig: 'T88UoZvi5yQgAS1160cozGl3NgoIIAJa',    // 必填
+                location: {latitude, longitude},
+                success(res) {
+                    console.log(res);
+                    const  city = res.result.ad_info.city
+                    wx.setStorageSync('loca_city', city);
+                },
+                fail(err) {
+                    console.log(err)
+                    wx.showToast('获取城市失败')
+                },
+                complete() {
+                    // 做点什么
+                }
+            })
+        })
+    },
     /**
      * 用户点击右上角分享
      */
@@ -120,6 +146,25 @@ Page({
         const id = e.target.dataset.id;
         wx.navigateTo({
             url:'/pages/houseDetail/index?id='+id
+        })
+    },
+    checkAuth(callback) {
+        wx.getSetting({
+            success(res) {
+                if (!res.authSetting['scope.userLocation']) {
+                    wx.authorize({
+                        scope: 'scope.userLocation',
+                        success() {
+                            wx.getLocation({
+                                type: 'wgs84',
+                                success(res) {
+                                    callback(res.latitude, res.longitude)
+                                }
+                            })
+                        }
+                    })
+                }
+            }
         })
     }
 })

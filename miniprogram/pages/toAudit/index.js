@@ -1,4 +1,5 @@
 // pages/toAudit/index.js
+// 待审核
 const db = wx.cloud.database();
 const _ = db.command;
 const sellList = db.collection('sellList');
@@ -14,7 +15,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onShow: function (options) {
         this.getSellData();
     },
 
@@ -26,7 +27,6 @@ Page({
     },
     // 获取列表数据
     getSellData() {
-        const openId = wx.getStorageSync('openId');
         sellList.where({
             status: _.eq('TO_AUDIT')
         }).get().then(res => {

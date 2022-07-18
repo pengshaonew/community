@@ -59,6 +59,7 @@ Page({
                 openId: wx.getStorageSync('openId'),
                 nickName: wx.getStorageSync('nickName'),
                 avatarUrl: wx.getStorageSync('avatarUrl'),
+                city: wx.getStorageSync('city')
             }
         })
             .then(res => {
