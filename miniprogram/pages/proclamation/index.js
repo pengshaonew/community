@@ -125,7 +125,7 @@ Page({
 
     // 查询公告
     getPublishData: function () {
-        publish.where({}).get().then(res => {
+        publish.get().then(res => {
             let content = res.data[0].content;
             this.setData({publishContent: content}, () => this.onEditorReady());
         })

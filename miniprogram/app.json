@@ -7,7 +7,8 @@
         "pages/myPublish/index",
         "pages/toAudit/index",
         "pages/userInfo/index",
-        "pages/proclamation/index"
+        "pages/proclamation/index",
+        "pages/test/index"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",

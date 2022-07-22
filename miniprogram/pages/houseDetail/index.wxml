@@ -8,9 +8,17 @@
         <view class="item price">参考价格：<text>{{houseInfo.price ? houseInfo.price + '元/平米' : '面议'}}</text></view>
         <view class="item contact">联系人：{{houseInfo.owner || '暂无'}}</view>
         <view class="item phone">
+<!--            <button-->
+<!--                    class="phoneBtn"-->
+<!--                    bindtap="getUserProfile"-->
+<!--                    wx:if="{{!openId}}"-->
+<!--            >-->
+<!--                立即咨询-->
+<!--            </button>-->
             <button
                     class="phoneBtn"
-                    bindtap="getUserProfile"
+                    open-type="getPhoneNumber"
+                    bindgetphonenumber="getPhoneNumber"
                     wx:if="{{!openId}}"
             >
                 立即咨询

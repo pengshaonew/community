@@ -34,7 +34,7 @@ Page({
                 success(res) {
                     console.log(res);
                     const  city = res.result.ad_info.city
-                    wx.setStorageSync('loca_city', city);
+                    wx.setStorageSync('city', city);
                 },
                 fail(err) {
                     console.log(err)
@@ -136,7 +136,7 @@ Page({
 
     // 公告
     getPublishData: function () {
-        publish.where({}).get().then(res => {
+        publish.get().then(res => {
             let content = res.data[0].content;
             this.setData({publishContent: content});
         })

@@ -16,8 +16,11 @@ exports.main = async (event, context) => {
     case 'getWXACode': {
       return getWXACode(event)
     }
-    case 'getOpenData': {
-      return getOpenData(event)
+    case 'getCellphone': {
+      return getCellphone(event)
+    }
+    case 'getPhoneNum':{
+      return getPhoneNum(event);
     }
     default: {
       return
@@ -84,4 +87,11 @@ async function getOpenData(event) {
   return cloud.getOpenData({
     list: event.openData.list,
   })
+}
+
+async function getCellphone(event) {
+  const res = await cloud.getOpenData({
+    list: [event.id],
+  });
+  return { res, event };
 }

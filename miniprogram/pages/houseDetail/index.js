@@ -103,7 +103,23 @@ Page({
             }
         })
     },
+    getPhoneNumber: function (e) {
+        console.log(e.detail);
+        wx.cloud.callFunction({
+            // 云函数名称
+            name: 'getPhone',
+            // 传给云函数的参数
+            data: {
+                cloudID: e.detail.cloudID
+            },
+        }).then(res => {
+            console.log(res);
+            let phone = res.result.list[0].data.phoneNumber
+            if (phone) {
 
+            }
+        }).catch(console.error)
+    },
     onGetOpenid: function (userInfo) {
         console.log(userInfo);
         // 调用云函数
