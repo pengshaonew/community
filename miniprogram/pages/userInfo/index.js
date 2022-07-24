@@ -92,6 +92,7 @@ Page({
                                 avatarUrl,
                                 nickName,
                                 openId,
+                                createTime: Date.now()
                             }
                         })
                             .then(res => {

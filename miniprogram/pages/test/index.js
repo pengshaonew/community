@@ -33,7 +33,6 @@ Page({
         }).catch(console.error)
     },
     getPhoneNumber(e) {
-        let cloudID = e.detail.cloudID //开放数据ID
         console.log(e.detail);
         wx.cloud.callFunction({
             // 云函数名称

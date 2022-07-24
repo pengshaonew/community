@@ -3,6 +3,7 @@ const db = wx.cloud.database();
 const _ = db.command;
 const sellList = db.collection('sellList');
 const users = db.collection('users');
+const intentionUsers = db.collection('intentionUsers');
 
 Page({
 
@@ -12,32 +13,35 @@ Page({
     data: {
         isToAudit: null,
         houseInfo: {},
-        openId:null
+        openId: null,
+        phone:null
     },
 
     onLoad: function (option) {
         const openId = wx.getStorageSync('openId');
+        const phone = wx.getStorageSync('phone');
         this.setData({
             openId,
+            phone,
             isToAudit: option.isToAudit,
             isDelBtn: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk' || openId === 'oxRJz5S3jhzU9ygdIofXoIXMsMWM'
         })
         this.getSellData(option.id);
     },
-    
+
     /**
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
         return {
-            title:'水云间',
-            path:'/pages/home/index',
-            imageUrl:'../../images/banner_1.png'
+            title: '水云间',
+            path: '/pages/home/index',
+            imageUrl: '../../images/banner_1.png'
         }
     },
-    onShareTimeline:function(){
+    onShareTimeline: function () {
         return {
-            title:'水云间'  
+            title: '水云间'
         }
     },
     handleStatus() {
@@ -113,10 +117,41 @@ Page({
                 cloudID: e.detail.cloudID
             },
         }).then(res => {
-            console.log(res);
-            let phone = res.result.list[0].data.phoneNumber
+            let phone = res.result.list[0].data.phoneNumber;
             if (phone) {
+                wx.setStorageSync('phone', phone);
+                this.setData({phone});
+                intentionUsers.where({
+                    phone: _.eq(phone)
+                }).get().then(result => {
+                    if (!result.data.length) {
+                        intentionUsers.add({
+                            data: {
+                                phone,
+                                createTime: Date.now()
+                            }
+                        }).then(res => {
+                            this.callPhone();
+                        })
+                    }else{
+                        this.callPhone();
+                    }
+                });
+                const openId = wx.getStorageSync('openId');
+                if(openId){
+                    wx.cloud.callFunction({
+                        // 云函数名称
+                        name: 'updateUserPhone',
+                        data: {
+                            openId,
+                            phone
+                        }
+                    }).then(res => {
+                        if (res && res.result && res.result.stats && res.result.stats.updated === 1) {
 
+                        }
+                    }).catch(console.error)
+                }
             }
         }).catch(console.error)
     },
