@@ -42,9 +42,8 @@ Page({
                 sig: 'T88UoZvi5yQgAS1160cozGl3NgoIIAJa',    // 必填
                 location: {latitude, longitude},
                 success(res) {
-                    console.log(res);
                     const city = res.result.ad_info.city;
-                    if(city){
+                    if (city) {
                         currentPage = 0;
                         pageSize = 10;
                         wx.setStorageSync('city', city);
@@ -54,9 +53,8 @@ Page({
                     }
                 },
                 fail(err) {
-                    console.log(err);
+                    console.log('获取城市失败',err);
                     _this.getSellData();
-                    wx.showToast('获取城市失败')
                 },
                 complete() {
                     // 做点什么
@@ -69,7 +67,7 @@ Page({
      */
     onShareAppMessage: function () {
         return {
-            title: '逛一圈-房屋租售',
+            title: '逛一圈-房屋租售，免费发布租售信息',
             path: '/pages/home/index',
             imageUrl: '../../images/banner_1.png'
         }
@@ -79,21 +77,7 @@ Page({
             title: '逛一圈'
         }
     },
-    //页面上拉触底事件的处理函数
-    onReachBottom: function() {
-        console.log("onReachBottom上拉触底事件")
-        if (!this.data.loadMore) {
-            this.setData({
-                loadMore: true, //加载中
-                loadAll: false //是否加载完所有数据
-            });
-
-            //加载更多，这里做下延时加载
-            this.getSellData();
-        }
-    },
-    searchScrollLower:function (){
-        console.log('searchScrollLower');
+    searchScrollLower: function () {
         if (!this.data.loadMore) {
             this.setData({
                 loadMore: true, //加载中
@@ -107,14 +91,13 @@ Page({
         }
     },
     clickNav: function (e) {
-        console.log(e);
         let index = e.currentTarget.dataset.index;
         this.setData({navIndex: index});
     },
 
     // 列表
     getSellData: function () {
-        const {city} = this.data;
+        const {city, searchWd} = this.data;
         //第一次加载数据
         if (currentPage === 1) {
             this.setData({
@@ -126,6 +109,9 @@ Page({
             status: _.eq('THROUGH'),
             city: _.eq(city)
         };
+        if (searchWd) {
+            params.title = new RegExp(searchWd, 'i');
+        }
         sellList.orderBy('createTime', 'desc')
             .where(params)
             .skip(currentPage * pageSize) //从第几个数据开始
@@ -148,7 +134,7 @@ Page({
                     loadMore: false //把"上拉加载"的变量设为false，隐藏
                 });
             }
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log("请求失败err", err)
             this.setData({
                 loadAll: false,
@@ -186,7 +172,6 @@ Page({
 
     bindRegionChange: function (e) {
         const city = e.detail.value[1];
-        console.log('picker发送选择改变，携带值为' + city, e.detail.value)
         wx.setStorageSync('city', city);
         currentPage = 0;
         pageSize = 10;
@@ -194,6 +179,14 @@ Page({
             region: e.detail.value,
             city, dataList: []
         }, () => {
+            this.getSellData();
+        })
+    },
+    handleSearch(e) {
+        const searchWd = e.detail.value;
+        currentPage = 0 // 当前第几页,0代表第一页
+        pageSize = 10 //每页显示多少数据
+        this.setData({dataList: [], searchWd}, () => {
             this.getSellData();
         })
     },

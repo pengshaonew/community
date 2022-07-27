@@ -1,5 +1,6 @@
 // pages/test/index.js
 import QQMapWX from "../../utils/qqmap-wx-jssdk.min";
+
 let qqmapsdk;
 let currentPage = 0 // 当前第几页,0代表第一页
 let pageSize = 10 //每页显示多少数据
@@ -14,7 +15,7 @@ Page({
     data: {
         region: ['广东省', '广州市'],
         customItem: '全部',
-        city:'',
+        city: '',
         dataList: [], //放置返回数据的数组
         loadMore: false, //"上拉加载"的变量，默认false，隐藏
         loadAll: false //“没有数据”的变量，默认false，隐藏
@@ -36,7 +37,7 @@ Page({
                 location: {latitude, longitude},
                 success(res) {
                     console.log(res.result.ad_info);
-                    const  city = res.result.ad_info.city;
+                    const city = res.result.ad_info.city;
                     wx.setStorageSync('city', city);
                     _this.setData({city});
                 },
@@ -58,7 +59,7 @@ Page({
         this.getData()
     },
     //页面上拉触底事件的处理函数
-    onReachBottom: function() {
+    onReachBottom: function () {
         console.log("上拉触底事件")
         let that = this
         if (!that.data.loadMore) {
@@ -68,13 +69,22 @@ Page({
             });
 
             //加载更多，这里做下延时加载
-            setTimeout(function() {
+            setTimeout(function () {
                 that.getData()
             }, 2000)
         }
     },
+    handleSearch(e) {
+        console.log('handleSearch', e);
+        const val = e.detail.value;
+        if (val){
+            currentPage = 0 // 当前第几页,0代表第一页
+            pageSize = 10 //每页显示多少数据
+            this.getData(val);
+        }
+    },
     //请求数据
-    getData() {
+    getData(searchWd) {
         let that = this;
         //第一次加载数据
         if (currentPage === 1) {
@@ -83,8 +93,12 @@ Page({
                 loadAll: false //把“没有数据”设为false，隐藏
             })
         }
+        let params = {}
+        if(searchWd){
+            params.content = new RegExp(searchWd, 'i');
+        }
         //云数据的请求
-        wx.cloud.database().collection("testList")
+        wx.cloud.database().collection("testList").where(params)
             .skip(currentPage * pageSize) //从第几个数据开始
             .limit(pageSize)
             .get({
@@ -137,7 +151,7 @@ Page({
             }
         }).catch(console.error)
     },
-    updateUser(){
+    updateUser() {
         wx.cloud.callFunction({
             // 云函数名称
             name: 'updateUserPhone',
@@ -166,8 +180,8 @@ Page({
             success(res) {
                 callback(res.latitude, res.longitude)
             },
-            fail(){
-                _this.getSellData();
+            fail() {
+
             }
         })
     },
@@ -214,7 +228,7 @@ Page({
             }
         })
     },
-    delFile(){
+    delFile() {
         // 删除文件
         wx.cloud.deleteFile({
             fileList: ['cloud://product-6gmyj2bv28878f63.7072-product-6gmyj2bv28878f63-1306873602/my-image.png']
@@ -225,5 +239,4 @@ Page({
             // handle error
         })
     }
-
 })

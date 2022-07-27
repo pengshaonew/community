@@ -1,10 +1,14 @@
 <!--banner部分-->
+<view class="header">
+	<picker wx:if="{{!!city}}" class="city" mode="region" bindchange="bindRegionChange" value="{{region}}" level="city">
+		<text>{{city}}</text>
+	</picker>
+	<input class="weui-input" placeholder="请输入查询内容" type="text" confirm-type="search" bindblur="handleSearch" />
+</view>
 <view class='banner'>
 	<image src="../../images/banner_1.png" />
 </view>
-<picker wx:if="{{!!city}}" class="city" mode="region" bindchange="bindRegionChange" value="{{region}}" level="city">
-	<text>当前所在城市：{{city}}</text>
-</picker>
+
 
 <view class="nav">
 	<view class="{{navIndex==='0' ? 'navItem navItemSelected' : 'navItem'}}" data-index="0" bindtap="clickNav">租售</view>

@@ -21,3 +21,22 @@ page {
     padding: 10rpx;
     text-align: center;
 }
+
+.header{
+    background: #1a8ae2;
+    padding: 20rpx 10rpx;
+    display: flex;
+    align-items: center;
+}
+.header input{
+    background: #fff;
+    width: 400rpx;
+    border-radius: 32rpx;
+    padding-left: 20rpx;
+    font-size: 28rpx;
+    margin-left: 20rpx;
+    height: 64rpx;
+}
+.header .city{
+    color: #fff;
+}
