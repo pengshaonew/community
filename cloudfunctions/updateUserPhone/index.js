@@ -12,7 +12,7 @@ const users = db.collection('users');
 // 云函数入口函数
 exports.main = async (event, context) => {
   return users.where({
-    _openid: _.eq(event.openid)
+    openId: _.eq(event.openId)
   }).update({
     data: {
       phone: _.set(event.phone)

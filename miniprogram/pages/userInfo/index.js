@@ -107,6 +107,11 @@ Page({
             }
         })
     },
+    goPublish(){
+        wx.redirectTo({
+            url:'/pages/addPublish/index'
+        })
+    },
 
     goMyPublish(){
         wx.navigateTo({

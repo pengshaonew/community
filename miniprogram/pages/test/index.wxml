@@ -1,11 +1,30 @@
 <!--pages/test/index.wxml-->
-<view>
+<!--<view>-->
+<!--    <text>当前所在城市：{{city}}</text>-->
 <!--    <button bindtap="updateList">更新</button>-->
-    <button
-            class="phoneBtn"
-            open-type="getPhoneNumber"
-            bindgetphonenumber="getPhoneNumber"
-    >
-        获取手机号
-    </button>
-</view>
+<!--    <button bindtap="updateUser">updateUserPhone</button>-->
+<!--    <button-->
+<!--            class="phoneBtn"-->
+<!--            open-type="getPhoneNumber"-->
+<!--            bindgetphonenumber="getPhoneNumber"-->
+<!--    >-->
+<!--        获取手机号-->
+<!--    </button>-->
+<!--    <image src="cloud://product-6gmyj2bv28878f63.7072-product-6gmyj2bv28878f63-1306873602/my-image.png"></image>-->
+    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" level="city">
+        <view class="picker">
+            当前选择：{{region[0]}}，{{region[1]}}
+        </view>
+    </picker>
+
+    <view bindtap="doUpload">上传图片</view>
+    <view bindtap="delFile">删除图片</view>
+<!--</view>-->
+
+<scroll-view scroll-y="true">
+    <view class="result-item" wx:for="{{dataList}}" wx:key="item">
+        <text class="title">{{item.content || item.nickName}}</text>
+    </view>
+    <view class="loading" hidden="{{!loadMore}}">正在载入更多...</view>
+    <view class="loading" hidden="{{!loadAll}}">已加载全部</view>
+</scroll-view>

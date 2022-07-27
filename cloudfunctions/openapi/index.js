@@ -16,12 +16,6 @@ exports.main = async (event, context) => {
     case 'getWXACode': {
       return getWXACode(event)
     }
-    case 'getCellphone': {
-      return getCellphone(event)
-    }
-    case 'getPhoneNum':{
-      return getPhoneNum(event);
-    }
     default: {
       return
     }

@@ -1,12 +1,14 @@
 //index.js
 import QQMapWX from '../../utils/qqmap-wx-jssdk.min.js'
+
 let qqmapsdk;
 const app = getApp()
 const db = wx.cloud.database();
 const _ = db.command;
 const sellList = db.collection('sellList');
 const publish = db.collection('proclamation');
-const users = db.collection('users');
+let currentPage = 0 // 当前第几页,0代表第一页
+let pageSize = 10 //每页显示多少数据
 Page({
     data: {
         avatarUrl: './user-unlogin.png',
@@ -14,14 +16,22 @@ Page({
         userDataList: [],
         dataList: [],
         navIndex: "0",
-        publishContent:''
+        publishContent: '',
+        city: '运城市'
     },
 
-    onShow(){
-        this.getSellData();
+    onShow() {
+        if (wx.getStorageSync('city')) {
+            this.setData({
+                city: wx.getStorageSync('city')
+            }, () => {
+                this.getSellData();
+            })
+        }
         this.getPublishData();
     },
-    onLoad(){
+    onLoad() {
+        const _this = this;
         // 实例化API核心类
         qqmapsdk = new QQMapWX({
             key: 'FT5BZ-ZG7CV-M22PM-U2RMI-X2IL2-OPFZP'    // 必填
@@ -33,11 +43,19 @@ Page({
                 location: {latitude, longitude},
                 success(res) {
                     console.log(res);
-                    const  city = res.result.ad_info.city
-                    wx.setStorageSync('city', city);
+                    const city = res.result.ad_info.city;
+                    if(city){
+                        currentPage = 0;
+                        pageSize = 10;
+                        wx.setStorageSync('city', city);
+                        _this.setData({city, dataList: []}, () => {
+                            _this.getSellData();
+                        });
+                    }
                 },
                 fail(err) {
-                    console.log(err)
+                    console.log(err);
+                    _this.getSellData();
                     wx.showToast('获取城市失败')
                 },
                 complete() {
@@ -51,86 +69,91 @@ Page({
      */
     onShareAppMessage: function () {
         return {
-            title:'水云间',
-            path:'/pages/home/index',
-            imageUrl:'../../images/banner_1.png'
+            title: '逛一圈-房屋租售',
+            path: '/pages/home/index',
+            imageUrl: '../../images/banner_1.png'
         }
     },
-    onShareTimeline:function(){
+    onShareTimeline: function () {
         return {
-            title:'水云间'  
+            title: '逛一圈'
         }
     },
-    // 上传图片
-    doUpload: function () {
-        // 选择图片
-        wx.chooseImage({
-            count: 1,
-            sizeType: ['compressed'],
-            sourceType: ['album', 'camera'],
-            success: function (res) {
+    //页面上拉触底事件的处理函数
+    onReachBottom: function() {
+        console.log("onReachBottom上拉触底事件")
+        if (!this.data.loadMore) {
+            this.setData({
+                loadMore: true, //加载中
+                loadAll: false //是否加载完所有数据
+            });
 
-                wx.showLoading({
-                    title: '上传中',
-                })
-
-                const filePath = res.tempFilePaths[0]
-
-                // 上传图片
-                const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
-                wx.cloud.uploadFile({
-                    cloudPath,
-                    filePath,
-                    success: res => {
-                        console.log('[上传文件] 成功：', res)
-
-                        app.globalData.fileID = res.fileID
-                        app.globalData.cloudPath = cloudPath
-                        app.globalData.imagePath = filePath
-
-                        wx.navigateTo({
-                            url: '../storageConsole/storageConsole'
-                        })
-                    },
-                    fail: e => {
-                        console.error('[上传文件] 失败：', e)
-                        wx.showToast({
-                            icon: 'none',
-                            title: '上传失败',
-                        })
-                    },
-                    complete: () => {
-                        wx.hideLoading()
-                    }
-                })
-
-            },
-            fail: e => {
-                console.error(e)
-            }
-        })
+            //加载更多，这里做下延时加载
+            this.getSellData();
+        }
     },
+    searchScrollLower:function (){
+        console.log('searchScrollLower');
+        if (!this.data.loadMore) {
+            this.setData({
+                loadMore: true, //加载中
+                loadAll: false //是否加载完所有数据
+            });
 
+            //加载更多，这里做下延时加载
+            setTimeout(() => {
+                this.getSellData()
+            }, 1000)
+        }
+    },
     clickNav: function (e) {
         console.log(e);
         let index = e.currentTarget.dataset.index;
         this.setData({navIndex: index});
     },
 
-    getUserList: function () {
-        users.where({
-            _openid: _.neq("")
-        }).get().then(result => {
-            this.setData({userDataList: result.data});
-        });
-    },
-
-    // 租房列表
+    // 列表
     getSellData: function () {
-        sellList.where({
-            status: _.eq('THROUGH')
-        }).orderBy('createTime', 'desc').get().then(res => {
-            this.setData({dataList: res.data});
+        const {city} = this.data;
+        //第一次加载数据
+        if (currentPage === 1) {
+            this.setData({
+                loadMore: true, //把"上拉加载"的变量设为true，显示
+                loadAll: false //把“没有数据”设为false，隐藏
+            })
+        }
+        let params = {
+            status: _.eq('THROUGH'),
+            city: _.eq(city)
+        };
+        sellList.orderBy('createTime', 'desc')
+            .where(params)
+            .skip(currentPage * pageSize) //从第几个数据开始
+            .limit(pageSize).get().then(res => {
+            if (res.data && res.data.length > 0) {
+                currentPage++;
+                this.setData({
+                    dataList: this.data.dataList.concat(res.data),
+                    loadMore: false //把"上拉加载"的变量设为false，显示
+                });
+                if (res.data.length < pageSize) {
+                    this.setData({
+                        loadMore: false, //隐藏加载中。。
+                        loadAll: true //所有数据都加载完了
+                    });
+                }
+            } else {
+                this.setData({
+                    loadAll: true, //把“没有数据”设为true，显示
+                    loadMore: false //把"上拉加载"的变量设为false，隐藏
+                });
+            }
+        }).catch((err)=>{
+            console.log("请求失败err", err)
+            this.setData({
+                loadAll: false,
+                loadMore: false
+            });
         })
     },
 
@@ -142,29 +165,36 @@ Page({
         })
     },
 
-    goDetail(e){
+    goDetail(e) {
         const id = e.target.dataset.id;
         wx.navigateTo({
-            url:'/pages/houseDetail/index?id='+id
+            url: '/pages/houseDetail/index?id=' + id
         })
     },
     checkAuth(callback) {
-        wx.getSetting({
+        const _this = this;
+        wx.getFuzzyLocation({
+            type: 'wgs84',
             success(res) {
-                if (!res.authSetting['scope.userLocation']) {
-                    wx.authorize({
-                        scope: 'scope.userLocation',
-                        success() {
-                            wx.getLocation({
-                                type: 'wgs84',
-                                success(res) {
-                                    callback(res.latitude, res.longitude)
-                                }
-                            })
-                        }
-                    })
-                }
+                callback(res.latitude, res.longitude)
+            },
+            fail() {
+                _this.getSellData();
             }
         })
-    }
+    },
+
+    bindRegionChange: function (e) {
+        const city = e.detail.value[1];
+        console.log('picker发送选择改变，携带值为' + city, e.detail.value)
+        wx.setStorageSync('city', city);
+        currentPage = 0;
+        pageSize = 10;
+        this.setData({
+            region: e.detail.value,
+            city, dataList: []
+        }, () => {
+            this.getSellData();
+        })
+    },
 })

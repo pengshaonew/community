@@ -37,6 +37,13 @@ Page({
             });
             return;
         }
+        if (!/^\d+$/.test(values.price)) {
+            wx.showToast({
+                title: '请输入有效的价格',
+                icon: 'none'
+            });
+            return;
+        }
         if (!values.owner) {
             wx.showToast({
                 title: '请输入联系人',

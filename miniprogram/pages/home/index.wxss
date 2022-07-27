@@ -2,15 +2,38 @@
 
 page {
     background: #f6f6f6;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.loading {
+    position: relative;
+    bottom: 5rpx;
+    padding: 10rpx;
+    text-align: center;
 }
 
 .banner {
     width: 100%;
     height: 380rpx;
+    position: relative;
+    display: none;
 }
 
 .banner image {
     width: 100%;
+}
+
+.city {
+    /*position: absolute;*/
+    left: 0;
+    top: 0;
+    color: #fff;
+    background: rgba(0, 0, 0, .3);
+    right: 0;
+    padding-left: 10rpx;
+    height: 60rpx;
 }
 
 .nav {
@@ -31,26 +54,6 @@ page {
 
 .navItemSelected {
     color: #05c494;
-}
-
-.userList {
-    padding: 0 20rpx;
-}
-
-.userItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.userItem image {
-    width: 80rpx;
-    height: 80rpx;
-}
-
-.userItem text {
-    font-size: 28rpx;
-    color: #333;
 }
 
 .listItem {
@@ -111,4 +114,8 @@ page {
 .other image {
     width: 240rpx;
     height: 360rpx;
+}
+
+scroll-view{
+    height: calc(100% - 180rpx);
 }

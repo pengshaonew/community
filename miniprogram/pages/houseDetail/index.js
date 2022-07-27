@@ -34,14 +34,14 @@ Page({
      */
     onShareAppMessage: function () {
         return {
-            title: '水云间',
+            title: '逛一圈-房屋租售',
             path: '/pages/home/index',
             imageUrl: '../../images/banner_1.png'
         }
     },
     onShareTimeline: function () {
         return {
-            title: '水云间'
+            title: '逛一圈'
         }
     },
     handleStatus() {

@@ -12,10 +12,10 @@ const sellList = db.collection('sellList');
 // 云函数入口函数
 exports.main = async (event, context) => {
   return sellList.where({
-    _openid: _.eq("1")
+    _openid: _.neq("1")
   }).update({
     data: {
-      city: _.set('运城')
+      city: _.set('运城市')
     },
   });
 }

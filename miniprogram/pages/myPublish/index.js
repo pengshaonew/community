@@ -40,10 +40,5 @@ Page({
         wx.navigateTo({
             url:'/pages/houseDetail/index?id='+id
         })
-    },
-    goPublish(){
-        wx.redirectTo({
-            url:'/pages/addPublish/index'
-        })
     }
 })

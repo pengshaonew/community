@@ -1,9 +1,0 @@
-<!--pages/mantisChat/index.wxml-->
-<text>pages/mantisChat/index.wxml</text>
-<mantisChat
-        id="mantisChat"
-        companyId="3403"
-        probeId="60ff7b7942e6824c77cf5c70"
-        chatPageUrl="https://demo2.bjmantis.net/chat/t1/chat.html?mcid=3403&mpid=60f6335542e6827c32c4d8bb"
-/>
-  <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">授权</button>
