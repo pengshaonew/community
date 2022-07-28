@@ -1,4 +1,5 @@
 // pages/houseDetail/index.js
+const app = getApp();
 const db = wx.cloud.database();
 const _ = db.command;
 const sellList = db.collection('sellList');
@@ -128,6 +129,7 @@ Page({
                         intentionUsers.add({
                             data: {
                                 phone,
+                                timeStr: app.formatDate(Date.now()),
                                 createTime: Date.now()
                             }
                         }).then(res => {

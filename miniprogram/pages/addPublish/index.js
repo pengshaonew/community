@@ -1,4 +1,5 @@
 // pages/addPublish/index.js
+const app = getApp();
 const db = wx.cloud.database();
 const _ = db.command;
 const sellList = db.collection('sellList');
@@ -62,6 +63,7 @@ Page({
             data: {
                 ...values,
                 createTime: Date.now(),
+                timeStr: app.formatDate(Date.now()),
                 status: 'TO_AUDIT',
                 openId: wx.getStorageSync('openId'),
                 nickName: wx.getStorageSync('nickName'),

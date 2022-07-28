@@ -1,5 +1,6 @@
 // pages/test/index.js
 import QQMapWX from "../../utils/qqmap-wx-jssdk.min";
+const app = getApp();
 
 let qqmapsdk;
 let currentPage = 0 // 当前第几页,0代表第一页
@@ -25,6 +26,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
+        console.log(app.formatDate(new Date, 'YYYY年MM月DD日'));
         const _this = this;
         // 实例化API核心类
         qqmapsdk = new QQMapWX({
