@@ -20,11 +20,11 @@
 	<block wx:for="{{dataList}}" wx:key="_id">
 		<view class="listItem" bindtap="goDetail">
 			<view class="listItem_L">
-				<image src="../../images/banner_1.png" data-id="{{item._id}}"/>
+				<image src="{{item.imgList ? item.imgList[0] : '../../images/banner_1.png'}}" data-id="{{item._id}}"/>
 			</view>
 			<view class="listItem_R">
 				<view class="listItem_R_title" data-id="{{item._id}}">{{item.title}}</view>
-				<view class="listItem_R_desc" data-id="{{item._id}}">{{item.roomNumber}}</view>
+				<view class="listItem_R_desc" data-id="{{item._id}}">{{item.owner}}</view>
 				<view class="listItem_R_price" data-id="{{item._id}}">{{item.price ? item.price + '元' : '面议'}}</view>
 			</view>
 		</view>

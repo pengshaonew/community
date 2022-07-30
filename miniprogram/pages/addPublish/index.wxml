@@ -8,15 +8,27 @@
                         <label class="weui-label">标题</label>
                     </view>
                     <view class="weui-cell__bd">
-                        <textarea class="weui-textarea" placeholder="标题" name="title" style="height:120rpx;" />
+                        <textarea class="weui-textarea" placeholder="请描述详细内容" name="title" />
                     </view>
                 </view>
-                <view class="weui-cell weui-cell_active">
-                    <view class="weui-cell__hd">
-                        <label class="weui-label">房间号</label>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" placeholder="X号楼X单元X房号" name="roomNumber" />
+<!--                <view class="weui-cell weui-cell_active">-->
+<!--                    <view class="weui-cell__hd">-->
+<!--                        <label class="weui-label">房间号</label>-->
+<!--                    </view>-->
+<!--                    <view class="weui-cell__bd">-->
+<!--                        <input class="weui-input" placeholder="X号楼X单元X房号" name="roomNumber" />-->
+<!--                    </view>-->
+<!--                </view>-->
+                <view class="imgBox">
+                    <block wx:for="{{imgList}}" wx:key="item">
+                        <view class="itemImg">
+                            <image data-fileid="{{item}}" bindtap="delFile" class="del" src="../../images/close.png" mode="widthFix"></image>
+                            <image class="img" src="{{item}}" mode="widthFix"></image>
+                        </view>
+                    </block>
+                    <view class="addImg" bindtap="doUpload" wx:if="{{imgList.length < 5}}">
+                        <image src="../../images/camera.png" mode="aspectFit"></image>
+                        添加图片
                     </view>
                 </view>
                 <view class="weui-cell weui-cell_active">
@@ -29,10 +41,10 @@
                 </view>
                 <view class="weui-cell weui-cell_active">
                     <view class="weui-cell__hd">
-                        <label class="weui-label">价格</label>
+                        <label class="weui-label">参考价格</label>
                     </view>
                     <view class="weui-cell__bd">
-                        <input class="weui-input" placeholder="每平米多少元" name="price" type="number" />
+                        <input class="weui-input" placeholder="房屋总价格" name="price" type="number" />
                     </view>
                 </view>
                 <view class="weui-cell weui-cell_active">
@@ -49,14 +61,6 @@
                     </view>
                     <view class="weui-cell__bd">
                         <input class="weui-input" placeholder="手机号" name="phone" type="number" />
-                    </view>
-                </view>
-                <view class="weui-cell weui-cell_active">
-                    <view class="weui-cell__hd">
-                        <label class="weui-label">描述</label>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" placeholder="详细信息" name="desc" />
                     </view>
                 </view>
             </view>

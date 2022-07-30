@@ -67,6 +67,20 @@ Page({
     handleDel() {
         const {houseInfo} = this.data;
         let id = houseInfo._id;
+        if (houseInfo.imgList) {
+            wx.cloud.deleteFile({
+                fileList: houseInfo.imgList
+            }).then(res => {
+                // handle success
+                if (res.fileList.length) {
+
+                }
+                console.log(res.fileList)
+            }).catch(error => {
+                wx.hideLoading();
+                console.error(error)
+            })
+        }
         wx.cloud.callFunction({
             // 云函数名称
             name: 'delHouseInfo',

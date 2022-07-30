@@ -77,10 +77,14 @@ page {
 .listItem_R_title {
     font-size: 28rpx;
     color: #3a3a3a;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
 }
 
 .listItem_R_desc {
-    font-size: 24rpx;
+    font-size: 28rpx;
     line-height: 64rpx;
     height: 64rpx;
 }
