@@ -34,10 +34,11 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
+        const {houseInfo} = this.data;
         return {
             title: '逛一圈-房屋租售,免费发布租售信息',
             path: '/pages/home/index',
-            imageUrl: '../../images/banner_1.png'
+            imageUrl: houseInfo.imgList && houseInfo.imgList[0] ? houseInfo.imgList[0] : '../../images/logo.png'
         }
     },
     onShareTimeline: function () {
@@ -143,7 +144,7 @@ Page({
                         intentionUsers.add({
                             data: {
                                 phone,
-                                timeStr: app.formatDate(Date.now()),
+                                timeStr: app.formatDate(new Date()),
                                 createTime: Date.now()
                             }
                         }).then(res => {

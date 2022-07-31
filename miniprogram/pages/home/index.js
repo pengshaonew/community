@@ -69,7 +69,7 @@ Page({
         return {
             title: '逛一圈-房屋租售，免费发布租售信息',
             path: '/pages/home/index',
-            imageUrl: '../../images/banner_1.png'
+            imageUrl: '../../images/logo.png'
         }
     },
     onShareTimeline: function () {
