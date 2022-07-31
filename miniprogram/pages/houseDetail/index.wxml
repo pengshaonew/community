@@ -5,7 +5,7 @@
         <swiper indicator-dots="{{true}}">
             <block wx:for="{{houseInfo.imgList}}" wx:key="item">
                 <swiper-item>
-                    <image src="{{item}}" class="maninUrl"  mode="widthFix" />
+                    <image src="{{item}}" class="maninUrl" mode="aspectFit" data-src="{{item}}" bindtap="seeMaxImg" />
                 </swiper-item>
             </block>
         </swiper>

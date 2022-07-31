@@ -2,7 +2,7 @@
 <view wx:if="{{!!dataList.length}}" class="weui-cells weui-cells_after-title">
     <block wx:for="{{dataList}}" wx:key="_id">
         <navigator url="{{'/pages/houseDetail/index?id=' + item._id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-            <view class="weui-cell__bd">{{item.title || item.roomNumber}}</view>
+            <view class="weui-cell__bd title">{{item.title || item.roomNumber}}</view>
             <view class="weui-cell__ft weui-cell__ft_in-access status">
                 {{item.status === 'TO_AUDIT' ? '待审核' : '已发布'}}
             </view>

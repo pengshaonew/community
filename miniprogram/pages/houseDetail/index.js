@@ -223,4 +223,12 @@ Page({
             }
         })
     },
+    seeMaxImg(e){
+        const src = e.currentTarget.dataset.src;//获取data-src
+        //图片预览
+        wx.previewImage({
+            current: src, // 当前显示图片的http链接
+            urls: this.data.houseInfo.imgList // 需要预览的图片http链接列表
+        })
+    }
 })
