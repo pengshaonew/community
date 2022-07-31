@@ -25,7 +25,7 @@ Page({
             openId,
             phone,
             isToAudit: option.isToAudit,
-            isDelBtn: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk' || openId === 'oxRJz5S3jhzU9ygdIofXoIXMsMWM'
+            isDelBtn: openId === 'oyi1h42zdjsGZRXXrGfRaPsnFC0w'
         })
         this.getSellData(option.id);
     },
@@ -36,7 +36,7 @@ Page({
     onShareAppMessage: function () {
         const {houseInfo} = this.data;
         return {
-            title: '逛一圈-房屋租售,免费发布租售信息',
+            title: '逛一圈-闲置物品转让求购,免费发布信息',
             path: '/pages/home/index',
             imageUrl: houseInfo.imgList && houseInfo.imgList[0] ? houseInfo.imgList[0] : '../../images/logo.png'
         }
@@ -198,7 +198,7 @@ Page({
                 this.callPhone();
                 this.setData({
                     openId,
-                    isDelBtn: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk' || openId === 'oxRJz5S3jhzU9ygdIofXoIXMsMWM'
+                    isDelBtn: openId === 'oyi1h42zdjsGZRXXrGfRaPsnFC0w'
                 });
                 users.where({
                     _openid: _.neq(openId)
@@ -223,4 +223,12 @@ Page({
             }
         })
     },
+    seeMaxImg(e){
+        const src = e.currentTarget.dataset.src;//获取data-src
+        //图片预览
+        wx.previewImage({
+            current: src, // 当前显示图片的http链接
+            urls: this.data.houseInfo.imgList // 需要预览的图片http链接列表
+        })
+    }
 })

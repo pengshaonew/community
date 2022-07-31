@@ -24,10 +24,6 @@
             <image src='../../images/publishIcon.png' />
             <text>待审核</text>
         </view>
-        <view class="listItem" bindtap="goProclamation" wx:if="{{isToAudit}}">
-            <image src='../../images/publishIcon.png' />
-            <text>公告</text>
-        </view>
         <!-- <button bindtap="sendMsg">测试消息</button>
         <button bindtap="msgSubscribe">订阅消息</button> -->
     </view>

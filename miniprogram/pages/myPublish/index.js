@@ -9,7 +9,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        dataList:{}
+        dataList:[]
     },
 
     /**
@@ -29,14 +29,15 @@ Page({
     getSellData() {
         const openId = wx.getStorageSync('openId');
         sellList.where({
-            openId: _.eq(openId)
+            openId: _.eq(openId),
+            // city: _.eq(wx.getStorageSync('city'))
         }).get().then(res => {
             this.setData({dataList: res.data});
         })
     },
 
     goDetail(e){
-        const id = e.target.dataset.id;
+        const id = e.currentTarget.dataset.id;
         wx.navigateTo({
             url:'/pages/houseDetail/index?id='+id
         })

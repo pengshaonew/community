@@ -1,14 +1,11 @@
 <!--pages/addPublish/index.wxml-->
-<view>
+<view class="addPublish">
     <form catchsubmit="handleSubmit">
         <view class="weui-cells__group weui-cells__group_form">
             <view class="weui-cells weui-cells_form">
                 <view class="weui-cell weui-cell_active" style="align-items: flex-start;">
-                    <view class="weui-cell__hd">
-                        <label class="weui-label">标题</label>
-                    </view>
                     <view class="weui-cell__bd">
-                        <textarea class="weui-textarea" placeholder="请描述详细内容" name="title" />
+                        <textarea class="weui-textarea" placeholder="请详细描述宝贝内容" name="title" />
                     </view>
                 </view>
 <!--                <view class="weui-cell weui-cell_active">-->
@@ -32,35 +29,59 @@
                     </view>
                 </view>
                 <view class="weui-cell weui-cell_active">
+                    <radio-group bindchange="radioChange" class="radio-group" name="demand">
+                        <label class="weui-cell weui-check__label">
+                            <view class="weui-cell__hd">
+                                <radio value="转让" checked="{{true}}"/>
+                            </view>
+                            <view class="weui-cell__bd">转让</view>
+                        </label>
+                        <label class="weui-cell weui-check__label">
+                            <view class="weui-cell__hd">
+                                <radio value="求购" checked="{{false}}"/>
+                            </view>
+                            <view class="weui-cell__bd">求购</view>
+                        </label>
+                    </radio-group>
+                </view>
+                <view class="weui-cell weui-cell_active">
+                    <radio-group bindchange="radioChange" class="radio-group" name="transferWay">
+                        <label class="weui-cell weui-check__label">
+                            <view class="weui-cell__hd">
+                                <radio value="自提" checked="{{true}}"/>
+                            </view>
+                            <view class="weui-cell__bd">自提</view>
+                        </label>
+                        <label class="weui-cell weui-check__label">
+                            <view class="weui-cell__hd">
+                                <radio value="包邮" checked="{{false}}"/>
+                            </view>
+                            <view class="weui-cell__bd">包邮</view>
+                        </label>
+                    </radio-group>
+                </view>
+                <view class="weui-cell weui-cell_active">
                     <view class="weui-cell__hd">
-                        <label class="weui-label">面积</label>
+                        <label class="weui-label">价格</label>
                     </view>
                     <view class="weui-cell__bd">
-                        <input class="weui-input" placeholder="面积" name="area" />
+                        <input class="weui-input" placeholder="价格" name="price" type="number" />
                     </view>
                 </view>
                 <view class="weui-cell weui-cell_active">
                     <view class="weui-cell__hd">
-                        <label class="weui-label">参考价格</label>
+                        <label class="weui-label">原价</label>
                     </view>
                     <view class="weui-cell__bd">
-                        <input class="weui-input" placeholder="房屋总价格" name="price" type="number" />
+                        <input class="weui-input" placeholder="宝贝原价" name="oldPrice" type="number" />
                     </view>
                 </view>
                 <view class="weui-cell weui-cell_active">
                     <view class="weui-cell__hd">
-                        <label class="weui-label">联系人</label>
+                        <label class="weui-label">联系电话</label>
                     </view>
                     <view class="weui-cell__bd">
-                        <input class="weui-input" placeholder="联系人" name="owner" />
-                    </view>
-                </view>
-                <view class="weui-cell weui-cell_active">
-                    <view class="weui-cell__hd">
-                        <label class="weui-label">手机号</label>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" placeholder="手机号" name="phone" type="number" />
+                        <input class="weui-input" placeholder="联系电话" name="phone" type="number" />
                     </view>
                 </view>
             </view>

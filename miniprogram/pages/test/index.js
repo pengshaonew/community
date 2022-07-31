@@ -158,7 +158,7 @@ Page({
             // 云函数名称
             name: 'updateUserPhone',
             data: {
-                openId: 'oxRJz5TIAWcLxkbJGq1grap0ZpPk',
+                openId: 'oyi1h42zdjsGZRXXrGfRaPsnFC0w',
                 phone: '13191241119'
             }
         }).then(res => {

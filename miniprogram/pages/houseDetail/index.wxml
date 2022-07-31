@@ -5,18 +5,16 @@
         <swiper indicator-dots="{{true}}">
             <block wx:for="{{houseInfo.imgList}}" wx:key="item">
                 <swiper-item>
-                    <image src="{{item}}" class="maninUrl"  mode="widthFix" />
+                    <image src="{{item}}" class="maninUrl" mode="aspectFit" data-src="{{item}}" bindtap="seeMaxImg" />
                 </swiper-item>
             </block>
         </swiper>
     </view>
-    <image wx:else src="../../images/banner_1.png" class="maninUrl" />
+    <image wx:else src="../../images/transfer.png" class="maninUrl" />
     <view class="main">
         <view class="title">{{houseInfo.title}}</view>
-<!--        <view class="item area">房间号：<text>{{houseInfo.roomNumber}}</text></view>-->
-        <view class="item area">建筑面积：<text>{{houseInfo.area}}</text></view>
-        <view class="item price">参考价格：<text>{{houseInfo.price ? houseInfo.price + '元' : '面议'}}</text></view>
-        <view class="item contact">联系人：{{houseInfo.owner || '暂无'}}</view>
+        <view class="item price">价格：<text>{{houseInfo.price ? houseInfo.price + '元' : '面议'}}</text></view>
+        <view class="item price" wx:if="{{houseInfo.oldPrice}}">原价：<text>{{houseInfo.oldPrice + '元'}}</text></view>
         <view class="item phone">
 <!--            <button-->
 <!--                    class="phoneBtn"-->

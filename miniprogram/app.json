@@ -1,11 +1,11 @@
 {
     "pages": [
         "pages/home/index",
+        "pages/addPublish/index",
         "pages/userInfo/index",
         "pages/test/index",
         "pages/sellList/index",
         "pages/houseDetail/index",
-        "pages/addPublish/index",
         "pages/myPublish/index",
         "pages/toAudit/index",
         "pages/proclamation/index"

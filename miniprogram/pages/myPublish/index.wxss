@@ -2,6 +2,22 @@
 .status {
     font-size: 26rpx;
 }
-.goPublish{
-    font-size:30rpx;
+
+.goPublish {
+    font-size: 30rpx;
+}
+
+.emptyData {
+    text-align: center;
+}
+
+.emptyImg {
+    width: 200rpx;
+
+}
+.title{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

@@ -33,7 +33,7 @@ Page({
         const openId = wx.getStorageSync('openId');
         if (nickName) {
             this.setData({
-                isToAudit: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk' || openId === 'oxRJz5S3jhzU9ygdIofXoIXMsMWM',
+                isToAudit: openId === 'oyi1h42zdjsGZRXXrGfRaPsnFC0w',
                 isLogin: true,
                 avatarUrl,
                 nickName
@@ -78,7 +78,7 @@ Page({
                     data: openId
                 });
                 this.setData({
-                    isToAudit: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk' || openId === 'oxRJz5S3jhzU9ygdIofXoIXMsMWM',
+                    isToAudit: openId === 'oyi1h42zdjsGZRXXrGfRaPsnFC0w',
                     isLogin: true,
                     avatarUrl,
                     nickName
@@ -92,7 +92,7 @@ Page({
                                 avatarUrl,
                                 nickName,
                                 openId,
-                                timeStr: app.formatDate(Date.now()),
+                                timeStr: app.formatDate(new Date()),
                                 createTime: Date.now()
                             }
                         })

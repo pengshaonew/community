@@ -6,7 +6,6 @@ const app = getApp()
 const db = wx.cloud.database();
 const _ = db.command;
 const sellList = db.collection('sellList');
-const publish = db.collection('proclamation');
 let currentPage = 0 // 当前第几页,0代表第一页
 let pageSize = 10 //每页显示多少数据
 Page({
@@ -16,22 +15,18 @@ Page({
         userDataList: [],
         dataList: [],
         navIndex: "0",
-        publishContent: '',
-        city: '运城市'
+        city: '北京市'
     },
-
-    onShow() {
-        if (wx.getStorageSync('city')) {
-            this.setData({
-                city: wx.getStorageSync('city')
-            }, () => {
-                this.getSellData();
-            })
-        }
-        this.getPublishData();
+    onShow(){
+        this.getSellData();
     },
     onLoad() {
         const _this = this;
+        if (wx.getStorageSync('city')) {
+            this.setData({
+                city: wx.getStorageSync('city')
+            })
+        }
         // 实例化API核心类
         qqmapsdk = new QQMapWX({
             key: 'FT5BZ-ZG7CV-M22PM-U2RMI-X2IL2-OPFZP'    // 必填
@@ -67,7 +62,7 @@ Page({
      */
     onShareAppMessage: function () {
         return {
-            title: '逛一圈-房屋租售，免费发布租售信息',
+            title: '逛一圈-闲置物品转让求购,免费发布信息',
             path: '/pages/home/index',
             imageUrl: '../../images/logo.png'
         }
@@ -127,12 +122,22 @@ Page({
                         loadMore: false, //隐藏加载中。。
                         loadAll: true //所有数据都加载完了
                     });
+                    setTimeout(()=>{
+                        this.setData({
+                            loadAll: false
+                        });
+                    }, 1000)
                 }
             } else {
                 this.setData({
                     loadAll: true, //把“没有数据”设为true，显示
                     loadMore: false //把"上拉加载"的变量设为false，隐藏
                 });
+                setTimeout(()=>{
+                    this.setData({
+                        loadAll: false
+                    });
+                }, 1000)
             }
         }).catch((err) => {
             console.log("请求失败err", err)
@@ -143,16 +148,8 @@ Page({
         })
     },
 
-    // 公告
-    getPublishData: function () {
-        publish.get().then(res => {
-            let content = res.data[0].content;
-            this.setData({publishContent: content});
-        })
-    },
-
     goDetail(e) {
-        const id = e.target.dataset.id;
+        const id = e.currentTarget.dataset.id;
         wx.navigateTo({
             url: '/pages/houseDetail/index?id=' + id
         })
