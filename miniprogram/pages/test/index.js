@@ -26,7 +26,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        console.log(app.formatDate(new Date, 'YYYY年MM月DD日'));
+        console.log(app.formatDate(new Date(), 'YYYY年MM月DD日'));
         const _this = this;
         // 实例化API核心类
         qqmapsdk = new QQMapWX({
@@ -203,7 +203,7 @@ Page({
                 const filePath = res.tempFilePaths[0]
 
                 // 上传图片
-                const cloudPath = 'sellImg/' + app.formatDate(new Date, 'YYYYMMDD') + '_' + Date.now() + filePath.match(/\.[^.]+?$/)[0]
+                const cloudPath = 'sellImg/' + app.formatDate(new Date(), 'YYYYMMDD') + '_' + Date.now() + filePath.match(/\.[^.]+?$/)[0]
                 wx.cloud.uploadFile({
                     cloudPath,  // 云存储路径
                     filePath,
