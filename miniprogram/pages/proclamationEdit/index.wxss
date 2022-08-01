@@ -1,0 +1,17 @@
+/* pages/proclamationEdit/index.wxss */
+.proclamationEdit{
+  background: #fff;
+  height: 100%;
+}
+.proclamation{
+  padding: 20rpx;
+  font-size: 28rpx;
+  line-height: 58rpx;
+  height: 800rpx;
+}
+.submit{
+  background: #0d9bff;
+    border-radius: 8rpx;
+    color: #fff;
+    font-size: 30rpx;
+}

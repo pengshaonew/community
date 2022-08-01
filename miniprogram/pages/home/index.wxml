@@ -23,7 +23,11 @@
 			</view>
 			<view class="listItem_R">
 				<view class="listItem_R_title" data-id="{{item._id}}">{{item.title}}</view>
-				<view class="listItem_R_price" data-id="{{item._id}}">{{item.price ? item.price + '元' : '面议'}}</view>
+        <view class="tagBox">
+            <text class="price" data-id="{{item._id}}">{{item.price ? item.price + '元' : '面议'}}</text>
+            <text class="demand">{{item.demand}}</text>
+            <text class="transferWay">{{item.transferWay}}</text>
+        </view>
 			</view>
 		</view>
 	</block>

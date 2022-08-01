@@ -1,0 +1,10 @@
+<!--pages/proclamationEdit/index.wxml-->
+<view class="proclamationEdit">
+  <textarea 
+      placeholder="请输入公告内容" 
+      class="proclamation" name="proclamation" 
+      value="{{proclamation}}" maxlength="{{88888}}" 
+      bindinput="changeCon"
+    />
+    <button class="submit" bindtap="handleSubmit"> 提交 </button>
+</view>

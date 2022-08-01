@@ -25,11 +25,11 @@
 }
 
 .item text{
-    font-size: 14px;
-    padding: 5px 20px;
-    margin-right: 10px;
+    font-size: 28rpx;
+    padding: 10rpx 40rpx;
+    margin-right: 20rpx;
     color: #fff;
-    border-radius: 6px;
+    border-radius: 6rpx;
 }
 
 .item .demand {

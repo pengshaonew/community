@@ -81,17 +81,13 @@ page {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    min-height: 60rpx;
 }
 
 .listItem_R_desc {
     font-size: 28rpx;
     line-height: 64rpx;
     height: 64rpx;
-}
-
-.listItem_R_price {
-    font-size: 24rpx;
-    color: red;
 }
 
 .other {
@@ -130,4 +126,27 @@ scroll-view{
 }
 .header .city{
     color: #fff;
+}
+
+.tagBox text{
+  font-size: 28rpx;
+  padding: 10rpx 40rpx;
+  margin-right: 20rpx;
+  color: #fff;
+  border-radius: 6rpx;
+}
+
+.tagBox .demand {
+  background: #6891fb;
+}
+
+.tagBox .transferWay {
+    background: #b32ef1;
+}
+
+.tagBox .price {
+  font-size: 24rpx;
+  color: red;
+  padding: 0;
+    margin-right: 60rpx;
 }

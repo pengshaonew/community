@@ -109,7 +109,7 @@ Page({
         })
     },
     goPublish(){
-        wx.redirectTo({
+        wx.navigateTo({
             url:'/pages/addPublish/index'
         })
     },
