@@ -25,6 +25,22 @@
 }
 
 .item text{
+    font-size: 14px;
+    padding: 5px 20px;
+    margin-right: 10px;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.item .demand {
+    background: #6891fb;
+}
+
+.item .transferWay {
+    background: #b32ef1;
+}
+
+.phone text {
     color: red;
 }
 

@@ -13,6 +13,10 @@
     <image wx:else src="../../images/transfer.png" class="maninUrl" />
     <view class="main">
         <view class="title">{{houseInfo.title}}</view>
+        <view class="item">
+            <text class="demand">{{houseInfo.demand}}</text>
+            <text class="transferWay">{{houseInfo.transferWay}}</text>
+        </view>
         <view class="item price">价格：<text>{{houseInfo.price ? houseInfo.price + '元' : '面议'}}</text></view>
         <view class="item price" wx:if="{{houseInfo.oldPrice}}">原价：<text>{{houseInfo.oldPrice + '元'}}</text></view>
         <view class="item phone">
