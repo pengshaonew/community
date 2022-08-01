@@ -92,7 +92,7 @@ Page({
                                 avatarUrl,
                                 nickName,
                                 openId,
-                                timeStr: app.formatDate(Date.now()),
+                                timeStr: app.formatDate(new Date()),
                                 createTime: Date.now()
                             }
                         })
