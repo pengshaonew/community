@@ -73,7 +73,7 @@
                         <label class="weui-label">联系方式</label>
                     </view>
                     <view class="weui-cell__bd">
-                        <input class="weui-input" placeholder="电话或微信号" name="phone" type="number" />
+                        <input class="weui-input" placeholder="电话或微信号" name="phone" type="text" />
                     </view>
                 </view>
             </view>
