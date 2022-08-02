@@ -38,14 +38,14 @@ Page({
             return;
         }
 
-        if (!/^1[3-9]\d{9}$/.test(values.phone)) {
+        if (!values.phone) {
             wx.showToast({
-                title: '联系方式有误,请检查确认',
+                title: '请填写联系方式',
                 icon: 'none'
             });
             return;
         }
-        values.title = values.title.replace(/1[3-9]\d{9}/, '');
+        // values.title = values.title.replace(/1[3-9]\d{9}/, '');
         sellList.add({
             data: {
                 ...values,
@@ -56,7 +56,7 @@ Page({
                 openId: wx.getStorageSync('openId'),
                 nickName: wx.getStorageSync('nickName'),
                 avatarUrl: wx.getStorageSync('avatarUrl'),
-                city: wx.getStorageSync('city') || '运城'
+                city: wx.getStorageSync('city') || '北京市'
             }
         })
             .then(res => {

@@ -5,7 +5,7 @@
         <swiper indicator-dots="{{true}}">
             <block wx:for="{{houseInfo.imgList}}" wx:key="item">
                 <swiper-item>
-                    <image src="{{item}}" class="maninUrl" mode="aspectFit" data-src="{{item}}" bindtap="seeMaxImg" />
+                    <image src="{{item}}" class="maninUrl" show-menu-by-longpress="true" mode="aspectFit" data-src="{{item}}" bindtap="seeMaxImg" />
                 </swiper-item>
             </block>
         </swiper>
@@ -17,16 +17,10 @@
             <text class="demand">{{houseInfo.demand}}</text>
             <text class="transferWay">{{houseInfo.transferWay}}</text>
         </view>
-        <view class="item price">价格：<text>{{houseInfo.price ? houseInfo.price + '元' : '面议'}}</text></view>
-        <view class="item price" wx:if="{{houseInfo.oldPrice}}">原价：<text>{{houseInfo.oldPrice + '元'}}</text></view>
-        <view class="item phone">
-<!--            <button-->
-<!--                    class="phoneBtn"-->
-<!--                    bindtap="getUserProfile"-->
-<!--                    wx:if="{{!openId}}"-->
-<!--            >-->
-<!--                立即咨询-->
-<!--            </button>-->
+        <view wx:if="{{houseInfo.price}}" class="item price">价格：<text class="price">{{houseInfo.price ? houseInfo.price + '元' : '面议'}}</text></view>
+        <view wx:if="{{houseInfo.oldPrice}}" class="item price" wx:if="{{houseInfo.oldPrice}}">原价：<text class="price">{{houseInfo.oldPrice + '元'}}</text></view>
+        <view class="item">联系方式：{{houseInfo.phone}}</view>
+        <!-- <view class="item phone">
             <button
                     class="phoneBtn"
                     open-type="getPhoneNumber"
@@ -36,7 +30,7 @@
                 立即咨询
             </button>
             <view bindtap="callPhone" wx:if="{{phone}}" data-phone="{{houseInfo.phone}}" class="phoneBtn">立即咨询</view>
-        </view>
+        </view> -->
         <view bindtap="handleStatus" class="weui-btn weui-btn_warn handleStatus" wx:if="{{isToAudit === '1'}}">通过</view>
         <view bindtap="handleDel" class="weui-btn weui-btn_warn handleDel" wx:if="{{isDelBtn || houseInfo.openId === openId}}">删除</view>
     </view>

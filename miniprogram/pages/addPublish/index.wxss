@@ -16,7 +16,7 @@
 }
 
 .weui-label {
-    width: 120rpx;
+    max-width:auto;
 }
 
 .weui-textarea {

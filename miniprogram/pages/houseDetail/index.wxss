@@ -40,7 +40,7 @@
     background: #b32ef1;
 }
 
-.phone text {
+.price text {
     color: red;
 }
 
@@ -65,6 +65,8 @@
 
 .handleDel {
     font-size:32rpx;
+    color: #fff;
+    background: #ff5858;
 }
 .handleStatus{
     font-size:32rpx;
