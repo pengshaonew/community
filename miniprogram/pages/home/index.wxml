@@ -1,4 +1,5 @@
 <!--banner部分-->
+<ad unit-id="adunit-495d169b959bbd96"></ad>
 <view class="header">
 	<picker wx:if="{{!!city}}" class="city" mode="region" bindchange="bindRegionChange" value="{{region}}" level="city">
 		<text>{{city}}</text>
