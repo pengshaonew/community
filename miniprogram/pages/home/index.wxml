@@ -19,7 +19,7 @@
 
 <scroll-view scroll-y="true" wx:if="{{navIndex==='0'}}" bindscrolltolower="searchScrollLower">
 	<block wx:for="{{dataList}}" wx:key="_id">
-		<view class="listItem" bindtap="goDetail">
+		<view class="listItem" bindtap="goDetail" data-id="{{item._id}}">
 			<view class="listItem_L">
 				<image src="{{item.imgList ? item.imgList[0] : '../../images/banner_1.png'}}" data-id="{{item._id}}"/>
 			</view>

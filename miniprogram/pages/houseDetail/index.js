@@ -5,7 +5,8 @@ const _ = db.command;
 const sellList = db.collection('sellList');
 const users = db.collection('users');
 const intentionUsers = db.collection('intentionUsers');
-
+// 在页面中定义激励视频广告
+let videoAd = null;
 Page({
 
     /**
@@ -28,6 +29,29 @@ Page({
             isDelBtn: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk' || openId === 'oxRJz5S3jhzU9ygdIofXoIXMsMWM'
         })
         this.getSellData(option.id);
+
+        // 在页面onLoad回调事件中创建激励视频广告实例
+        if (wx.createRewardedVideoAd) {
+            videoAd = wx.createRewardedVideoAd({
+                adUnitId: 'adunit-900a7ad3b047777b'
+            })
+            videoAd.onLoad(() => {})
+            videoAd.onError((err) => {})
+            videoAd.onClose((res) => {})
+        }
+        // 用户触发广告后，显示激励视频广告
+        if (videoAd) {
+            videoAd.onClose(res => {
+                // 用户点击了【关闭广告】按钮
+                if (res && res.isEnded) {
+                    // 正常播放结束，可以下发游戏奖励
+                    this.callPhone();
+                } else {
+                    // 播放中途退出，不下发游戏奖励
+                }
+            })
+        }
+
     },
 
     /**
@@ -230,5 +254,18 @@ Page({
             current: src, // 当前显示图片的http链接
             urls: this.data.houseInfo.imgList // 需要预览的图片http链接列表
         })
+    },
+    showVideo(){
+        if(videoAd){
+
+            videoAd.show().catch(() => {
+                // 失败重试
+                videoAd.load()
+                    .then(() => videoAd.show())
+                    .catch(err => {
+                        console.log('激励视频 广告显示失败')
+                    })
+            })
+        }
     }
 })

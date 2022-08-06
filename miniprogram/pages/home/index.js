@@ -152,7 +152,7 @@ Page({
     },
 
     goDetail(e) {
-        const id = e.target.dataset.id;
+        const id = e.currentTarget.dataset.id;
         wx.navigateTo({
             url: '/pages/houseDetail/index?id=' + id
         })
