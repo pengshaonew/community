@@ -8,6 +8,7 @@
         "pages/addPublish/index",
         "pages/myPublish/index",
         "pages/toAudit/index",
+        "pages/userList/index",
         "pages/proclamation/index"
     ],
     "window": {

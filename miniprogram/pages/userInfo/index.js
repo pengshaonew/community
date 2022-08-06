@@ -36,7 +36,8 @@ Page({
                 isToAudit: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk' || openId === 'oxRJz5S3jhzU9ygdIofXoIXMsMWM',
                 isLogin: true,
                 avatarUrl,
-                nickName
+                nickName,
+                openId
             })
         }
     },
@@ -127,6 +128,11 @@ Page({
     goProclamation(){
         wx.navigateTo({
             url:'/pages/proclamation/index'
+        })
+    },
+    goUserList(){
+        wx.navigateTo({
+            url:'/pages/userList/index'
         })
     },
     sendMsg(){

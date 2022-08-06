@@ -1,0 +1,27 @@
+/* pages/userList/index.wxss */
+
+scroll-view{
+    height: 100%;
+}
+
+.listItem {
+    height: 100rpx;
+    display: flex;
+    align-items: center;
+    padding-left:40rpx;
+    border-bottom: 1rpx solid #ccc;
+}
+
+.avatarUrl{
+    width: 50rpx;
+    height: 50rpx;
+    border-radius: 6rpx;
+    margin-right: 10rpx;
+}
+
+.loading {
+    position: relative;
+    bottom: 5rpx;
+    padding: 10rpx;
+    text-align: center;
+}

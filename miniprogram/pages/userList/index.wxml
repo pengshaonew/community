@@ -1,0 +1,10 @@
+<!--pages/userList/index.wxml-->
+<scroll-view scroll-y="true" bindscrolltolower="searchScrollLower">
+    <block wx:for="{{userList}}" wx:key="_id">
+        <view class="listItem"  data-id="{{item._id}}">
+            <image class="avatarUrl" src="{{item.avatarUrl}}"></image>{{item.nickName}}
+        </view>
+    </block>
+    <view class="loading" hidden="{{!loadMore}}">正在载入更多...</view>
+    <view class="loading" hidden="{{!loadAll && !!userList.length}}">已加载全部</view>
+</scroll-view>
