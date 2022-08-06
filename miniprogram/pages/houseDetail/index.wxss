@@ -6,6 +6,8 @@
 
 .main {
     padding: 20rpx 40rpx;
+    background: #fff;
+    margin-top: 20rpx;
 }
 
 .title {

@@ -39,6 +39,7 @@ page {
     align-items: center;
     justify-content: center;
     font-size: 28rpx;
+    height: 100rpx;
 }
 
 .navItemSelected {
@@ -110,7 +111,7 @@ page {
 }
 
 scroll-view{
-    height: calc(100% - 180rpx);
+    height: calc(100% - 220rpx);
 }
 
 .header{
