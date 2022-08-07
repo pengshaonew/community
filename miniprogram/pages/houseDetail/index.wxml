@@ -1,6 +1,6 @@
 <!--pages/houseDetail/index.wxml-->
 <view class="houseDetail">
-    <view wx:if="{{houseInfo.imgList && houseInfo.imgList.length}}">
+    <view wx:if="{{houseInfo.imgList && houseInfo.imgList.length}}" class="imgBox">
 
         <swiper indicator-dots="{{true}}">
             <block wx:for="{{houseInfo.imgList}}" wx:key="item">
@@ -18,7 +18,7 @@
             <text class="transferWay">{{houseInfo.transferWay}}</text>
         </view>
         <view wx:if="{{houseInfo.price}}" class="item price">价格：<text class="price">{{houseInfo.price ? houseInfo.price + '元' : '面议'}}</text></view>
-        <view wx:if="{{houseInfo.oldPrice}}" class="item price" wx:if="{{houseInfo.oldPrice}}">原价：<text class="price">{{houseInfo.oldPrice + '元'}}</text></view>
+        <view wx:if="{{houseInfo.oldPrice}}" class="item price">原价：<text class="price">{{houseInfo.oldPrice + '元'}}</text></view>
         <view class="item">联系方式：{{houseInfo.phone}}</view>
         <!-- <view class="item phone">
             <button

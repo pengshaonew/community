@@ -36,7 +36,7 @@ Page({
     onShareAppMessage: function () {
         const {houseInfo} = this.data;
         return {
-            title: '逛一圈-闲置物品转让求购,免费发布信息',
+            title: houseInfo.title + ' —— 逛一圈，闲置物品转让求购,免费发布信息',
             path: '/pages/home/index',
             imageUrl: houseInfo.imgList && houseInfo.imgList[0] ? houseInfo.imgList[0] : '../../images/logo.png'
         }

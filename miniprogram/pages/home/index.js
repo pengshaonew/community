@@ -62,7 +62,7 @@ Page({
      */
     onShareAppMessage: function () {
         return {
-            title: '逛一圈-闲置物品转让求购,免费发布信息',
+            title: '逛一圈 —— 闲置物品转让求购,免费发布信息',
             path: '/pages/home/index',
             imageUrl: '../../images/logo.png'
         }

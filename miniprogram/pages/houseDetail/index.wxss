@@ -1,11 +1,18 @@
 /* pages/houseDetail/index.wxss */
 
+
+.main {
+    padding: 20rpx 40rpx;
+    background: #fff;
+    margin-top: 20rpx;
+}
+
 .maninUrl {
     height: 100%;
 }
 
-.main {
-    padding: 20rpx 40rpx;
+.imgBox {
+    background: #fff;
 }
 
 .title {
@@ -24,7 +31,7 @@
     margin-bottom: 20rpx;
 }
 
-.item text{
+.item text {
     font-size: 28rpx;
     padding: 10rpx 40rpx;
     margin-right: 20rpx;
@@ -64,10 +71,11 @@
 }
 
 .handleDel {
-    font-size:32rpx;
+    font-size: 32rpx;
     color: #fff;
     background: #ff5858;
 }
-.handleStatus{
-    font-size:32rpx;
+
+.handleStatus {
+    font-size: 32rpx;
 }

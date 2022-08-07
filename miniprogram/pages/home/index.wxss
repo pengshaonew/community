@@ -50,7 +50,7 @@ page {
     color: #333;
     background: #fff;
     padding: 20rpx;
-    border-bottom: 1px solid #e6e6e6;
+    border-bottom: 4px solid #e8e8e8;
 }
 
 .listItem_L {
@@ -106,7 +106,7 @@ page {
 }
 
 scroll-view{
-    height: calc(100% - 180rpx);
+    height: calc(100% - 100rpx);
 }
 
 .header{

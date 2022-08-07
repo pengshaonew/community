@@ -5,9 +5,9 @@
 	</picker>
 	<input class="weui-input" placeholder="请输入查询内容" type="text" confirm-type="search" bindblur="handleSearch" />
 </view>
-<view class='banner'>
-	<image src="../../images/banner_1.png" />
-</view>
+<!--<view class='banner'>-->
+<!--	<image src="../../images/banner_1.png" />-->
+<!--</view>-->
 
 
 <!--<view class="nav">-->
