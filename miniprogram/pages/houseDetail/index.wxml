@@ -25,15 +25,15 @@
 <!--            >-->
 <!--                立即咨询-->
 <!--            </button>-->
-<!--            <button-->
-<!--                    class="phoneBtn"-->
-<!--                    open-type="getPhoneNumber"-->
-<!--                    bindgetphonenumber="getPhoneNumber"-->
-<!--                    wx:if="{{!phone}}"-->
-<!--            >-->
-<!--                立即咨询-->
-<!--            </button>-->
-            <view bindtap="showVideo" data-phone="{{houseInfo.phone}}" class="phoneBtn">立即咨询</view>
+            <button
+                    class="phoneBtn"
+                    open-type="getPhoneNumber"
+                    bindgetphonenumber="getPhoneNumber"
+                    wx:if="{{!phone}}"
+            >
+                立即咨询
+            </button>
+<!--            <view bindtap="showVideo" data-phone="{{houseInfo.phone}}" class="phoneBtn">立即咨询</view>-->
         </view>
         <view bindtap="handleStatus" class="weui-btn weui-btn_warn handleStatus" wx:if="{{isToAudit === '1'}}">通过</view>
         <view bindtap="handleDel" class="weui-btn weui-btn_warn handleDel" wx:if="{{isDelBtn || houseInfo.openId === openId}}">删除</view>
