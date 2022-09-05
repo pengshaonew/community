@@ -61,7 +61,7 @@ Page({
         const {houseInfo} = this.data;
         return {
             title: houseInfo.title + ' —— 逛一圈-房屋租售,免费发布租售信息',
-            path: '/pages/home/index',
+            path: '/pages/houseDetail/index?id=' + houseInfo._id,
             imageUrl: houseInfo.imgList && houseInfo.imgList[0] ? houseInfo.imgList[0] : '../../images/logo.png'
         }
     },
@@ -136,16 +136,20 @@ Page({
         })
     },
     getUserProfile: function (e) {
-        wx.getUserProfile({
-            desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-            success: (res) => {
-                this.setData({
-                    userInfo: res.userInfo,
-                    isLogin: true
-                })
-                this.onGetOpenid(res.userInfo);
-            }
-        })
+        if (this.data.openId) {
+            this.callPhone();
+        } else {
+            wx.getUserProfile({
+                desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+                success: (res) => {
+                    this.setData({
+                        userInfo: res.userInfo,
+                        isLogin: true
+                    })
+                    this.onGetOpenid(res.userInfo);
+                }
+            })
+        }
     },
     getPhoneNumber: function (e) {
         console.log(e.detail);

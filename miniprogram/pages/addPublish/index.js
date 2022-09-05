@@ -48,13 +48,13 @@ Page({
             });
             return;
         }
-        if (!/^\d+$/.test(values.price)) {
-            wx.showToast({
-                title: '请输入有效的价格',
-                icon: 'none'
-            });
-            return;
-        }
+        // if (!/^\d+$/.test(values.price)) {
+        //     wx.showToast({
+        //         title: '请输入有效的价格',
+        //         icon: 'none'
+        //     });
+        //     return;
+        // }
         if (!values.owner) {
             wx.showToast({
                 title: '请输入联系人',
@@ -69,6 +69,7 @@ Page({
             });
             return;
         }
+        values.price = values.price || '面议';
         values.title = values.title.replace(/1[3-9]\d{9}/, '');
         sellList.add({
             data: {

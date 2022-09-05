@@ -27,6 +27,8 @@ Page({
             }, () => {
                 this.getSellData();
             })
+        } else {
+            this.getSellData();
         }
         this.getPublishData();
     },
