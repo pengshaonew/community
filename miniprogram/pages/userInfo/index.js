@@ -1,10 +1,12 @@
 // pages/userInfo/index.js
 
 const app = getApp();
-const {globalData} = getApp();
+const { globalData } = getApp();
 const db = wx.cloud.database();
 const _ = db.command;
 const users = db.collection('users');
+const moment = require('moment');
+
 Page({
 
     /**
@@ -14,7 +16,7 @@ Page({
         avatarUrl: '../../images/defaultHeader.png',
         nickName: '邻居',
         isLogin: false,
-        isToAudit:false,
+        isToAudit: false,
         canIUseGetUserProfile: false
     },
 
@@ -24,9 +26,9 @@ Page({
     onLoad: function (options) {
         if (wx.getUserProfile) {
             this.setData({
-              canIUseGetUserProfile: true
+                canIUseGetUserProfile: true
             })
-          }
+        }
 
         const avatarUrl = wx.getStorageSync('avatarUrl');
         const nickName = wx.getStorageSync('nickName');
@@ -46,13 +48,13 @@ Page({
         wx.getUserProfile({
             desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
             success: (res) => {
-              this.setData({
-                userInfo: res.userInfo,
-                isLogin: true
-              })
-              this.onGetOpenid(res.userInfo);
+                this.setData({
+                    userInfo: res.userInfo,
+                    isLogin: true
+                })
+                this.onGetOpenid(res.userInfo);
             }
-          })
+        })
     },
 
     onGetOpenid: function (userInfo) {
@@ -85,7 +87,7 @@ Page({
                     nickName
                 });
                 users.where({
-                    _openid: _.neq(openId)
+                    _openid: openId
                 }).get().then(result => {
                     if (!result.data.length) {
                         users.add({
@@ -109,56 +111,56 @@ Page({
             }
         })
     },
-    goPublish(){
+    goPublish() {
         wx.redirectTo({
-            url:'/pages/addPublish/index'
+            url: '/pages/addPublish/index'
         })
     },
 
-    goMyPublish(){
+    goMyPublish() {
         wx.navigateTo({
-            url:'/pages/myPublish/index'
+            url: '/pages/myPublish/index'
         })
     },
-    goToAudit(){
+    goToAudit() {
         wx.navigateTo({
-            url:'/pages/toAudit/index'
+            url: '/pages/toAudit/index'
         })
     },
-    goProclamation(){
+    goProclamation() {
         wx.navigateTo({
-            url:'/pages/proclamation/index'
+            url: '/pages/proclamation/index'
         })
     },
-    goUserList(){
+    goUserList() {
         wx.navigateTo({
-            url:'/pages/userList/index'
+            url: '/pages/userList/index'
         })
     },
-    sendMsg(){
+    sendMsg() {
         wx.cloud.callFunction({
             // 云函数名称
             name: 'sendNotice',
             // 传给云函数的参数
             data: {
-                content:'通知消息测试'
+                content: '通知消息测试'
             },
         }).then(res => {
             console.log(107, res);
         }).catch(console.error)
     },
-    msgSubscribe(){
+    msgSubscribe() {
         wx.requestSubscribeMessage({
             tmplIds: ['mmChUuo0gQCk5geTc22116m9n4FLaXCH19GMO7TncNs'],
-            success (res) {
+            success(res) {
                 console.log(res)
-             },
-             fail(res){
-                 console.log('fail',res)
-             },
-             complete(){
-                 console.log('complete')
-             }
+            },
+            fail(res) {
+                console.log('fail', res)
+            },
+            complete() {
+                console.log('complete')
+            }
         })
     }
 })

@@ -42,20 +42,20 @@ Page({
             // https://lbs.qq.com/qqmap_wx_jssdk/method-reverseGeocoder.html
             qqmapsdk.reverseGeocoder({
                 sig: 'T88UoZvi5yQgAS1160cozGl3NgoIIAJa',    // 必填
-                location: {latitude, longitude},
+                location: { latitude, longitude },
                 success(res) {
                     const city = res.result.ad_info.city;
                     if (city) {
                         currentPage = 0;
                         pageSize = 10;
                         wx.setStorageSync('city', city);
-                        _this.setData({city, dataList: []}, () => {
+                        _this.setData({ city, dataList: [] }, () => {
                             _this.getSellData();
                         });
                     }
                 },
                 fail(err) {
-                    console.log('获取城市失败',err);
+                    console.log('获取城市失败', err);
                     _this.getSellData();
                 },
                 complete() {
@@ -94,12 +94,12 @@ Page({
     },
     clickNav: function (e) {
         let index = e.currentTarget.dataset.index;
-        this.setData({navIndex: index});
+        this.setData({ navIndex: index });
     },
 
     // 列表
     getSellData: function () {
-        const {city, searchWd} = this.data;
+        const { city, searchWd } = this.data;
         //第一次加载数据
         if (currentPage === 1) {
             this.setData({
@@ -118,38 +118,38 @@ Page({
             .where(params)
             .skip(currentPage * pageSize) //从第几个数据开始
             .limit(pageSize).get().then(res => {
-            if (res.data && res.data.length > 0) {
-                currentPage++;
-                this.setData({
-                    dataList: this.data.dataList.concat(res.data),
-                    loadMore: false //把"上拉加载"的变量设为false，显示
-                });
-                if (res.data.length < pageSize) {
+                if (res.data && res.data.length > 0) {
+                    currentPage++;
                     this.setData({
-                        loadMore: false, //隐藏加载中。。
-                        loadAll: true //所有数据都加载完了
+                        dataList: this.data.dataList.concat(res.data),
+                        loadMore: false //把"上拉加载"的变量设为false，显示
+                    });
+                    if (res.data.length < pageSize) {
+                        this.setData({
+                            loadMore: false, //隐藏加载中。。
+                            loadAll: true //所有数据都加载完了
+                        });
+                    }
+                } else {
+                    this.setData({
+                        loadAll: true, //把“没有数据”设为true，显示
+                        loadMore: false //把"上拉加载"的变量设为false，隐藏
                     });
                 }
-            } else {
+            }).catch((err) => {
+                console.log("请求失败err", err)
                 this.setData({
-                    loadAll: true, //把“没有数据”设为true，显示
-                    loadMore: false //把"上拉加载"的变量设为false，隐藏
+                    loadAll: false,
+                    loadMore: false
                 });
-            }
-        }).catch((err) => {
-            console.log("请求失败err", err)
-            this.setData({
-                loadAll: false,
-                loadMore: false
-            });
-        })
+            })
     },
 
     // 公告
     getPublishData: function () {
         publish.get().then(res => {
-            let content = res.data[0].content;
-            this.setData({publishContent: content});
+            let content = res.data[0]?.content;
+            this.setData({ publishContent: content });
         })
     },
 
@@ -188,7 +188,7 @@ Page({
         const searchWd = e.detail.value;
         currentPage = 0 // 当前第几页,0代表第一页
         pageSize = 10 //每页显示多少数据
-        this.setData({dataList: [], searchWd}, () => {
+        this.setData({ dataList: [], searchWd }, () => {
             this.getSellData();
         })
     },

@@ -50,31 +50,30 @@ Page({
             openId: _.neq('少鹏')
         }).skip(users_currentPage * users_pageSize) //从第几个数据开始
             .limit(users_pageSize).get().then(res => {
-            console.log(res.data);
-            if (res.data && res.data.length > 0) {
-                users_currentPage++;
-                this.setData({
-                    userList: this.data.userList.concat(res.data),
-                    loadMore: false //把"上拉加载"的变量设为false，显示
-                });
-                if (res.data.length < users_pageSize) {
+                if (res.data && res.data.length > 0) {
+                    users_currentPage++;
                     this.setData({
-                        loadMore: false, //隐藏加载中。。
-                        loadAll: true //所有数据都加载完了
+                        userList: this.data.userList.concat(res.data),
+                        loadMore: false //把"上拉加载"的变量设为false，显示
+                    });
+                    if (res.data.length < users_pageSize) {
+                        this.setData({
+                            loadMore: false, //隐藏加载中。。
+                            loadAll: true //所有数据都加载完了
+                        });
+                    }
+                } else {
+                    this.setData({
+                        loadAll: true, //把“没有数据”设为true，显示
+                        loadMore: false //把"上拉加载"的变量设为false，隐藏
                     });
                 }
-            } else {
+            }).catch((err) => {
+                console.log("请求失败err", err)
                 this.setData({
-                    loadAll: true, //把“没有数据”设为true，显示
-                    loadMore: false //把"上拉加载"的变量设为false，隐藏
+                    loadAll: false,
+                    loadMore: false
                 });
-            }
-        }).catch((err) => {
-            console.log("请求失败err", err)
-            this.setData({
-                loadAll: false,
-                loadMore: false
             });
-        });
     }
 })

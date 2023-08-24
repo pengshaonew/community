@@ -1,4 +1,4 @@
-//app.js
+console.log();//app.js
 App({
     onLaunch: function () {
         if (!wx.cloud) {
@@ -10,7 +10,7 @@ App({
                 //   此处请填入环境 ID, 环境 ID 可打开云控制台查看
                 //   如不填则使用默认环境（第一个创建的环境）
                 // env: 'room-q4ke9',
-                env: 'product-6gmyj2bv28878f63',
+                env: 'yuncheng-2gnofbqi3f61983d',
                 traceUser: true,
             })
         }
@@ -39,23 +39,23 @@ App({
         const hours = date.getHours();
         const minutes = date.getMinutes();
         const seconds = date.getSeconds();
-        let formatDate = `${year}-${this.fun(month)}-${this.fun(days)} ${this.fun(hours)}:${this.fun(minutes)}:${this.fun(seconds)} `;
+        let formatDate = `${year}-${this.fun(month)}-${this.fun(days)} ${this.fun(hours)}:${this.fun(minutes)}:${this.fun(seconds)}`;
         if (format === 'YYYY-MM-DD') {
             formatDate = formatDate.replace(/\s.+$/g, '');
-        }else if(format === 'HH:MM:SS'){
+        } else if (format === 'HH:MM:SS') {
             formatDate = formatDate.replace(/^[\s]+\s/g, '');
-        }else if(format === 'YYYY年MM月DD日'){
+        } else if (format === 'YYYY年MM月DD日') {
             formatDate = formatDate.replace(/\s.+$/g, '').replace(/(\d+)-(\d+)-(\d+)/, '$1年$2月$3日');
-        }else if(format === 'YYYY年MM月DD日'){
+        } else if (format === 'YYYY年MM月DD日') {
             formatDate = formatDate.replace(/^[\s]+\s/g, '').replace(/(\d+):(\d+):(\d+)/, '$1时$2分$3秒');
-        }else if(format === 'YYYYMMDD'){
+        } else if (format === 'YYYYMMDD') {
             formatDate = formatDate.replace(/\s.+$/g, '').replace(/-/g, '');
-        }else if(format === 'YYYYMMDDHHMMSS'){
+        } else if (format === 'YYYYMMDDHHMMSS') {
             formatDate = formatDate.replace(/[-: ]/g, '').replace(/-/g, '');
         }
         return formatDate;
     },
-    fun(val){
+    fun(val) {
         return val < 10 ? '0' + val : val
     }
 })

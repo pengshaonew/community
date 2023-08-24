@@ -22,7 +22,7 @@ Page({
         this.getPublishData();
         const platform = wx.getSystemInfoSync().platform
         const isIOS = platform === 'ios'
-        this.setData({isIOS})
+        this.setData({ isIOS })
         const that = this
         this.updatePosition(0)
         let keyboardHeight = 0
@@ -44,13 +44,13 @@ Page({
     },
     updatePosition(keyboardHeight) {
         const toolbarHeight = 50
-        const {windowHeight, platform} = wx.getSystemInfoSync()
+        const { windowHeight, platform } = wx.getSystemInfoSync()
         let editorHeight = keyboardHeight > 0 ? (windowHeight - keyboardHeight - toolbarHeight) : windowHeight
-        this.setData({editorHeight, keyboardHeight})
+        this.setData({ editorHeight, keyboardHeight })
     },
     calNavigationBarAndStatusBar() {
         const systemInfo = wx.getSystemInfoSync()
-        const {statusBarHeight, platform} = systemInfo
+        const { statusBarHeight, platform } = systemInfo
         const isIOS = platform === 'ios'
         const navigationBarHeight = isIOS ? 44 : 48
         return statusBarHeight + navigationBarHeight
@@ -65,7 +65,7 @@ Page({
         }).exec()
     },
     format(e) {
-        let {name, value} = e.target.dataset
+        let { name, value } = e.target.dataset
         if (!name) return
         // console.log('format', name, value)
         this.editorCtx.format(name, value)
@@ -74,7 +74,7 @@ Page({
     onStatusChange(e) {
         const formats = e.detail
         console.log(e)
-        this.setData({formats})
+        this.setData({ formats })
     },
     insertDivider() {
         this.editorCtx.insertDivider({
@@ -120,14 +120,14 @@ Page({
         })
     },
     editComplate(e) {
-        this.setData({publishContentNew: e.detail.html});
+        this.setData({ publishContentNew: e.detail.html });
     },
 
     // 查询公告
     getPublishData: function () {
         publish.get().then(res => {
-            let content = res.data[0].content;
-            this.setData({publishContent: content}, () => this.onEditorReady());
+            let content = res.data[0]?.content;
+            this.setData({ publishContent: content }, () => this.onEditorReady());
         })
     },
     // 提交
@@ -145,10 +145,10 @@ Page({
                 },
             }).then(res => {
                 if (res && res.result && res.result.stats && res.result.stats.updated === 1) {
-                    wx.showToast({title: '保存成功'});
-                    this.setData({publishContentNew: ''});
+                    wx.showToast({ title: '保存成功' });
+                    this.setData({ publishContentNew: '' });
                 } else {
-                    wx.showToast({title: '保存失败，请联系管理员'});
+                    wx.showToast({ title: '保存失败，请联系管理员' });
                 }
             }).catch(console.error);
             // console.log(this.data.publishContentNew);
