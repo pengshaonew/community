@@ -31,20 +31,20 @@
                         添加图片
                     </view>
                 </view>
-                <view class="weui-cell weui-cell_active">
+                <!-- <view class="weui-cell weui-cell_active">
                     <view class="weui-cell__hd">
                         <label class="weui-label">面积</label>
                     </view>
                     <view class="weui-cell__bd">
                         <input class="weui-input" placeholder="面积" name="area" />
                     </view>
-                </view>
+                </view> -->
                 <view class="weui-cell weui-cell_active">
                     <view class="weui-cell__hd">
-                        <label class="weui-label">参考价格</label>
+                        <label class="weui-label">宝贝价格</label>
                     </view>
                     <view class="weui-cell__bd">
-                        <input class="weui-input" placeholder="房屋总价格" name="price"/>
+                        <input class="weui-input" placeholder="宝贝价格" name="price"/>
                     </view>
                 </view>
                 <view class="weui-cell weui-cell_active">

@@ -22,7 +22,6 @@
 .item {
     font-size: 28rpx;
     color: #676565;
-    align-items: center;
     margin-bottom: 20rpx;
 }
 
@@ -32,26 +31,30 @@
 
 .phone {
     display: flex;
-    justify-content: center;
+        flex-direction: column;
+    align-items: center;
 }
 
-.phone .phoneBtn {
-    background: #0d9bff;
-    border-radius: 8rpx;
+.btn{
     color: #fff;
-    text-align: center;
     width: 368rpx;
     height: 80rpx;
-    font-size: 32rpx;
+    font-size:32rpx;
+    border-radius: 8rpx;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20rpx;
+}
+
+.phone .phoneBtn {
+    background: #0d9bff;
 }
 
 .handleDel {
-    font-size:32rpx;
+    background:red;
 }
 .handleStatus{
-    font-size:32rpx;
+    background: #0d9bff;
 }

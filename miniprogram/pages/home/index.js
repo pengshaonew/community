@@ -30,7 +30,7 @@ Page({
         } else {
             this.getSellData();
         }
-        this.getPublishData();
+        // this.getPublishData();
     },
     onLoad() {
         const _this = this;

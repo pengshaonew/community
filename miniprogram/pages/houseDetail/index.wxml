@@ -1,41 +1,58 @@
 <!--pages/houseDetail/index.wxml-->
 <view class="houseDetail">
-    <view wx:if="{{houseInfo.imgList && houseInfo.imgList.length}}">
-
-        <swiper indicator-dots="{{true}}">
-            <block wx:for="{{houseInfo.imgList}}" wx:key="item">
-                <swiper-item>
-                    <image src="{{item}}" class="maninUrl" mode="aspectFit" data-src="{{item}}" bindtap="seeMaxImg" />
-                </swiper-item>
-            </block>
-        </swiper>
+  <view wx:if="{{houseInfo.imgList && houseInfo.imgList.length}}">
+    <swiper indicator-dots="{{true}}">
+      <block wx:for="{{houseInfo.imgList}}" wx:key="item">
+        <swiper-item>
+          <image
+            src="{{item}}"
+            class="maninUrl"
+            mode="aspectFit"
+            data-src="{{item}}"
+            bindtap="seeMaxImg" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <image
+    wx:else
+    src="../../images/banner_1.png"
+    class="maninUrl" />
+  <view class="main">
+    <view class="title">{{houseInfo.title}}</view>
+    <!-- <view class="item area">房间号：<text>{{houseInfo.roomNumber}}</text></view>-->
+    <!-- <view class="item area">建筑面积：<text>{{houseInfo.area}}</text></view> -->
+    <view class="item price">
+      宝贝价格：
+      <text>{{houseInfo.price ? houseInfo.price + '元' : '面议'}}</text>
     </view>
-    <image wx:else src="../../images/banner_1.png" class="maninUrl" />
-    <view class="main">
-        <view class="title">{{houseInfo.title}}</view>
-<!--        <view class="item area">房间号：<text>{{houseInfo.roomNumber}}</text></view>-->
-        <view class="item area">建筑面积：<text>{{houseInfo.area}}</text></view>
-        <view class="item price">参考价格：<text>{{houseInfo.price ? houseInfo.price + '元' : '面议'}}</text></view>
-        <view class="item contact">联系人：{{houseInfo.owner || '暂无'}}</view>
-        <view class="item phone">
-            <button
-                    class="phoneBtn"
-                    bindtap="getUserProfile"
-            >
-                立即咨询
-            </button>
-<!--            <button-->
-<!--                    class="phoneBtn"-->
-<!--                    open-type="getPhoneNumber"-->
-<!--                    bindgetphonenumber="getPhoneNumber"-->
-<!--                    wx:if="{{!phone}}"-->
-<!--            >-->
-<!--                立即咨询-->
-<!--            </button>-->
-<!--            <view bindtap="showVideo" data-phone="{{houseInfo.phone}}" class="phoneBtn">立即咨询</view>-->
-        </view>
-        <view bindtap="handleStatus" class="weui-btn weui-btn_warn handleStatus" wx:if="{{isToAudit === '1'}}">通过</view>
-        <view bindtap="handleDel" class="weui-btn weui-btn_warn handleDel" wx:if="{{isDelBtn || houseInfo.openId === openId}}">删除</view>
+    <view class="item contact">联系人：{{houseInfo.owner || '暂无'}}</view>
+    <view class="item phone">
+      <button class="btn phoneBtn" bindtap="getUserProfile">立即咨询</button>
+      <!-- <button-->
+      <!-- class="phoneBtn"-->
+      <!-- open-type="getPhoneNumber"-->
+      <!-- bindgetphonenumber="getPhoneNumber"-->
+      <!-- wx:if="{{!phone}}"-->
+      <!-- >-->
+      <!-- 立即咨询-->
+      <!-- </button>-->
+      <!-- <view bindtap="showVideo" data-phone="{{houseInfo.phone}}" class="phoneBtn">立即咨询</view>-->
+      <button
+        bindtap="handleStatus"
+        class="btn handleStatus"
+        wx:if="{{isToAudit === '1'}}"
+      >
+        通过
+      </button>
+      <button
+        bindtap="handleDel"
+        class="btn handleDel"
+        wx:if="{{isDelBtn || houseInfo.openId === openId}}"
+      >
+        删除
+      </button>
     </view>
-    <ad unit-id="adunit-7c0f4877c3c466a6" ad-type="video" ad-theme="white"></ad>
+  </view>
+  <!-- <ad unit-id="adunit-7c0f4877c3c466a6" ad-type="video" ad-theme="white" /> -->
 </view>

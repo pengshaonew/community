@@ -47,7 +47,7 @@ Page({
             })
         }
         users.where({
-            openId: _.neq('少鹏')
+            openId: _.neq('oyi1h42zdjsGZRXXrGfRaPsnFC0w')
         }).skip(users_currentPage * users_pageSize) //从第几个数据开始
             .limit(users_pageSize).get().then(res => {
                 if (res.data && res.data.length > 0) {

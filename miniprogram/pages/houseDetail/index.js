@@ -26,7 +26,7 @@ Page({
             openId,
             phone,
             isToAudit: option.isToAudit,
-            isDelBtn: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk' || openId === 'oxRJz5S3jhzU9ygdIofXoIXMsMWM'
+            isDelBtn: openId === 'oyi1h42zdjsGZRXXrGfRaPsnFC0w'
         })
         this.getSellData(option.id);
 
@@ -226,7 +226,7 @@ Page({
                 this.callPhone();
                 this.setData({
                     openId,
-                    isDelBtn: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk' || openId === 'oxRJz5S3jhzU9ygdIofXoIXMsMWM'
+                    isDelBtn: openId === 'oyi1h42zdjsGZRXXrGfRaPsnFC0w'
                 });
                 users.where({
                     _openid: _.neq(openId)
