@@ -1,6 +1,6 @@
 <!--pages/houseDetail/index.wxml-->
 <view class="houseDetail">
-  <view wx:if="{{houseInfo.imgList && houseInfo.imgList.length}}">
+  <view>
     <swiper indicator-dots="{{true}}">
       <block wx:for="{{houseInfo.imgList}}" wx:key="item">
         <swiper-item>
@@ -14,10 +14,7 @@
       </block>
     </swiper>
   </view>
-  <image
-    wx:else
-    src="../../images/banner_1.png"
-    class="maninUrl" />
+ 
   <view class="main">
     <view class="title">{{houseInfo.title}}</view>
     <!-- <view class="item area">房间号：<text>{{houseInfo.roomNumber}}</text></view>-->

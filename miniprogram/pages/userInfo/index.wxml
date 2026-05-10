@@ -28,7 +28,7 @@
             <image src='../../images/publishIcon.png' />
             <text>公告</text>
         </view>
-        <view class="listItem" bindtap="goUserList" wx:if="{{openId === 'oyi1h42zdjsGZRXXrGfRaPsnFC0w'}}">
+        <view class="listItem" bindtap="goUserList" wx:if="{{openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk'}}">
             <image src='../../images/publishIcon.png' />
             <text>用户列表</text>
         </view>

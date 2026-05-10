@@ -26,7 +26,7 @@ Page({
             openId,
             phone,
             isToAudit: option.isToAudit,
-            isDelBtn: openId === 'oyi1h42zdjsGZRXXrGfRaPsnFC0w'
+            isDelBtn: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk'
         })
         this.getSellData(option.id);
 
@@ -226,7 +226,7 @@ Page({
                 this.callPhone();
                 this.setData({
                     openId,
-                    isDelBtn: openId === 'oyi1h42zdjsGZRXXrGfRaPsnFC0w'
+                    isDelBtn: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk'
                 });
                 users.where({
                     _openid: _.neq(openId)

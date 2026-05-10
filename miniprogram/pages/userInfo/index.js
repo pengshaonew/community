@@ -35,7 +35,7 @@ Page({
         const openId = wx.getStorageSync('openId');
         if (nickName) {
             this.setData({
-                isToAudit: openId === 'oyi1h42zdjsGZRXXrGfRaPsnFC0w',
+                isToAudit: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk',
                 isLogin: true,
                 avatarUrl,
                 nickName,
@@ -81,7 +81,7 @@ Page({
                     data: openId
                 });
                 this.setData({
-                    isToAudit: openId === 'oyi1h42zdjsGZRXXrGfRaPsnFC0w',
+                    isToAudit: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk',
                     isLogin: true,
                     avatarUrl,
                     nickName
