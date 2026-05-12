@@ -1,6 +1,11 @@
 /* pages/houseDetail/index.wxss */
 
-.maninUrl {
+
+swiper{
+    height:564rpx;
+    background:black;
+}
+.maninUrl { 
     width: 100%;
 }
 

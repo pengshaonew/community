@@ -11,3 +11,11 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.emptyData {
+    display:flex;
+    justify-content: center;
+}
+.emptyData image{
+    width:200rpx;
+
+}
