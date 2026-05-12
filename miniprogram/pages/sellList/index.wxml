@@ -6,6 +6,7 @@
         </view>
         <view class="listItem_R">
             <view class="listItem_R_title">{{item.title}}</view>
+            <rich-text nodes="{{houseInfo.title}}"></rich-text>
             <view class="listItem_R_desc">{{item.desc}}</view>
             <view class="listItem_R_price">￥{{item.price}}元/平米</view>
         </view>

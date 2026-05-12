@@ -1,70 +1,104 @@
 <!--pages/addPublish/index.wxml-->
 <view>
-    <form catchsubmit="handleSubmit">
-        <view class="weui-cells__group weui-cells__group_form">
-            <view class="weui-cells weui-cells_form">
-                <view class="weui-cell weui-cell_active" style="align-items: flex-start;">
-                    <view class="weui-cell__hd">
-                        <label class="weui-label">标题</label>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <textarea class="weui-textarea" placeholder="请描述详细内容" name="title" />
-                    </view>
-                </view>
-<!--                <view class="weui-cell weui-cell_active">-->
-<!--                    <view class="weui-cell__hd">-->
-<!--                        <label class="weui-label">房间号</label>-->
-<!--                    </view>-->
-<!--                    <view class="weui-cell__bd">-->
-<!--                        <input class="weui-input" placeholder="X号楼X单元X房号" name="roomNumber" />-->
-<!--                    </view>-->
-<!--                </view>-->
-                <view class="imgBox">
-                    <block wx:for="{{imgList}}" wx:key="item">
-                        <view class="itemImg">
-                            <image data-fileid="{{item}}" bindtap="delFile" class="del" src="../../images/close.png" mode="widthFix"></image>
-                            <image class="img" src="{{item}}" mode="widthFix"></image>
-                        </view>
-                    </block>
-                    <view class="addImg" bindtap="doUpload" wx:if="{{imgList.length < 5}}">
-                        <image src="../../images/camera.png" mode="aspectFit"></image>
-                        添加图片
-                    </view>
-                </view>
-                <!-- <view class="weui-cell weui-cell_active">
-                    <view class="weui-cell__hd">
-                        <label class="weui-label">面积</label>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" placeholder="面积" name="area" />
-                    </view>
-                </view> -->
-                <view class="weui-cell weui-cell_active">
-                    <view class="weui-cell__hd">
-                        <label class="weui-label">宝贝价格</label>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" placeholder="宝贝价格" name="price"/>
-                    </view>
-                </view>
-                <view class="weui-cell weui-cell_active">
-                    <view class="weui-cell__hd">
-                        <label class="weui-label">联系人</label>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" placeholder="联系人" name="owner" />
-                    </view>
-                </view>
-                <view class="weui-cell weui-cell_active">
-                    <view class="weui-cell__hd">
-                        <label class="weui-label">手机号</label>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" placeholder="手机号" name="phone" type="number" />
-                    </view>
-                </view>
-            </view>
-            <button type="primary" formType="submit"  class="weui-btn weui-btn_primary submitBtn">提交审核</button>
+  <form catchsubmit="handleSubmit">
+    <view class="weui-cells__group weui-cells__group_form">
+      <view class="weui-cells weui-cells_form">
+        <view class="weui-cell weui-cell_active" style="align-items: flex-start;">
+          <view class="weui-cell__hd">
+            <label class="weui-label">标题</label>
+          </view>
+          <view class="weui-cell__bd">
+            <textarea
+              class="weui-textarea"
+              placeholder="请输入标题"
+              name="title" />
+          </view>
         </view>
-    </form>
+        <view class="weui-cell weui-cell_active" style="align-items: flex-start;">
+          <view class="weui-cell__hd">
+            <label class="weui-label">宝贝描述</label>
+          </view>
+          <view class="weui-cell__bd">
+            <view class="container" style="height:{{editorHeight}}rpx;">
+              <editor
+                id="editor"
+                class="ql-container"
+                placeholder="{{placeholder}}"
+                bindstatuschange="onStatusChange"
+                bindinput="editComplate"
+                read-only='{{false}}'
+              >
+              </editor>
+            </view>
+          </view>
+        </view>
+        <view class="imgBox">
+          <block wx:for="{{imgList}}" wx:key="item">
+            <view class="itemImg">
+              <image
+                data-fileid="{{item}}"
+                bindtap="delFile"
+                class="del"
+                src="../../images/close.png"
+                mode="widthFix" />
+              <image
+                class="img"
+                src="{{item}}"
+                mode="widthFix" />
+            </view>
+          </block>
+          <view
+            class="addImg"
+            bindtap="doUpload"
+            wx:if="{{imgList.length < 5}}"
+          >
+            <image src="../../images/camera.png" mode="aspectFit" />
+            添加图片
+          </view>
+        </view>
+        <!-- <view class="weui-cell weui-cell_active"> <view class="weui-cell__hd"> <label class="weui-label">面积</label> </view> <view class="weui-cell__bd"> <input class="weui-input" placeholder="面积" name="area" /> </view> </view> -->
+        <view class="weui-cell weui-cell_active">
+          <view class="weui-cell__hd">
+            <label class="weui-label">宝贝价格</label>
+          </view>
+          <view class="weui-cell__bd">
+            <input
+              class="weui-input"
+              placeholder="宝贝价格"
+              name="price" />
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_active">
+          <view class="weui-cell__hd">
+            <label class="weui-label">联系人</label>
+          </view>
+          <view class="weui-cell__bd">
+            <input
+              class="weui-input"
+              placeholder="联系人"
+              name="owner" />
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_active">
+          <view class="weui-cell__hd">
+            <label class="weui-label">手机号</label>
+          </view>
+          <view class="weui-cell__bd">
+            <input
+              class="weui-input"
+              placeholder="手机号"
+              name="phone"
+              type="number" />
+          </view>
+        </view>
+      </view>
+      <button
+        type="primary"
+        formType="submit"
+        class="weui-btn weui-btn_primary submitBtn"
+      >
+        提交审核
+      </button>
+    </view>
+  </form>
 </view>

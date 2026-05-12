@@ -1,48 +1,65 @@
 <!--banner部分-->
-<!-- <ad unit-id="adunit-495d169b959bbd96"></ad> -->
+<!-- <ad unit-id="adunit-495d169b959bbd96" /> -->
 <view class="header">
-	<picker wx:if="{{!!city}}" class="city" mode="region" bindchange="bindRegionChange" value="{{region}}" level="city">
-		<text>{{city}}</text>
-	</picker>
-	<input class="weui-input" placeholder="请输入查询内容" type="text" confirm-type="search" bindblur="handleSearch" />
+  <picker
+    wx:if="{{!!city}}"
+    class="city"
+    mode="region"
+    bindchange="bindRegionChange"
+    value="{{region}}"
+    level="city"
+  >
+    <text>{{city}}</text>
+  </picker>
+  <input
+    class="weui-input"
+    placeholder="请输入查询内容"
+    type="text"
+    confirm-type="search"
+    bindblur="handleSearch" />
 </view>
 <view class='banner'>
-	<image src="../../images/banner_1.png" />
+  <image src="../../images/banner_1.png" />
 </view>
-
-<!-- <view class="nav">
-	<view class="{{navIndex==='0' ? 'navItem navItemSelected' : 'navItem'}}" data-index="0" bindtap="clickNav">租售</view>
-	<view class="{{navIndex==='2' ? 'navItem navItemSelected' : 'navItem'}}" data-index="2" bindtap="clickNav">公告</view>
-</view> -->
-
-<scroll-view scroll-y="true" wx:if="{{navIndex==='0'}}" bindscrolltolower="searchScrollLower">
-	<block wx:for="{{dataList}}" wx:key="_id">
-		<view class="listItem" bindtap="goDetail" data-id="{{item._id}}">
-			<view class="listItem_L">
-				<image src="{{item.imgList && item.imgList[0] ? item.imgList[0] : '../../images/banner_1.png'}}" data-id="{{item._id}}"/>
-			</view>
-			<view class="listItem_R">
-				<view class="listItem_R_title" data-id="{{item._id}}">标题：{{item.title}}</view>
-				<view class="listItem_R_desc" data-id="{{item._id}}">联系人：{{item.owner}}</view>
-				<view class="listItem_R_price" data-id="{{item._id}}">价格：{{item.price ? item.price + '元' : '面议'}}</view>
-			</view>
-		</view>
-	</block>
-	<view class="loading" hidden="{{!loadMore}}">正在载入更多...</view>
-	<!-- <view class="loading" hidden="{{!loadAll}}">已加载全部数据</view> -->
+<!-- <view class="nav"> <view class="{{navIndex==='0' ? 'navItem navItemSelected' : 'navItem'}}" data-index="0" bindtap="clickNav">租售</view> <view class="{{navIndex==='2' ? 'navItem navItemSelected' : 'navItem'}}" data-index="2" bindtap="clickNav">公告</view> </view> -->
+<scroll-view
+  scroll-y="true"
+  wx:if="{{navIndex==='0'}}"
+  bindscrolltolower="searchScrollLower"
+>
+  <block wx:for="{{dataList}}" wx:key="_id">
+    <view
+      class="listItem"
+      bindtap="goDetail"
+      data-id="{{item._id}}"
+    >
+      <view class="listItem_L">
+        <image src="{{item.imgList && item.imgList[0] ? item.imgList[0] : '../../images/banner_1.png'}}" data-id="{{item._id}}" />
+      </view>
+      <view class="listItem_R">
+        <view class="listItem_R_title" data-id="{{item._id}}">{{item.title}}</view>
+        <view class="listItem_R_desc" data-id="{{item._id}}">联系人：{{item.owner}}</view>
+        <view class="listItem_R_price" data-id="{{item._id}}">
+          <text class='text1'>价格：{{item.price ? item.price + '元' : '面议'}}</text>
+          
+        </view>
+      </view>
+    </view>
+  </block>
+  <view class="loading" hidden="{{!loadMore}}">正在载入更多...</view>
+  <!-- <view class="loading" hidden="{{!loadAll}}">已加载全部数据</view> -->
 </scroll-view>
 <view wx:if="{{navIndex === '2'}}" class="other">
-	<rich-text nodes="{{publishContent}}"></rich-text>
-	<!--		<image src='../../images/notAvailable.png'></image>-->
+  <rich-text nodes="{{publishContent}}">
+  </rich-text>
+  <!-- <image src='../../images/notAvailable.png' />-->
 </view>
-
-
 <view class="userList" wx:if="{{false}}">
-	<block wx:for="{{userDataList}}" wx:key="_id">
-		<view class="userItem">
-			<image src="{{item.avatarUrl}}"></image>
-			<text>{{item.nickName}}</text>
-			<text>删除</text>
-		</view>
-	</block>
+  <block wx:for="{{userDataList}}" wx:key="_id">
+    <view class="userItem">
+      <image src="{{item.avatarUrl}}" />
+      <text>{{item.nickName}}</text>
+      <text>删除</text>
+    </view>
+  </block>
 </view>

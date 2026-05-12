@@ -5,7 +5,7 @@ const { globalData } = getApp();
 const db = wx.cloud.database();
 const _ = db.command;
 const users = db.collection('users');
-const moment = require('moment');
+// import moment from 'moment';
 
 Page({
 

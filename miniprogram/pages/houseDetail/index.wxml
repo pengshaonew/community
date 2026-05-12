@@ -16,16 +16,20 @@
 		</swiper>
 	</view>
 	<view class="main">
-		<view class="title">{{houseInfo.title}}</view>
-		<!-- <view class="item area">房间号：<text>{{houseInfo.roomNumber}}</text></view> -->
-		<!-- <view class="item area">建筑面积：<text>{{houseInfo.area}}</text></view> -->
+		<view class='item title'>
+			{{houseInfo.title}}
+		</view>
+		<view class='item time'>
+			{{houseInfo.timeStr}}
+		</view>
+		<rich-text nodes="{{houseInfo.desc}}"></rich-text>
 		<view class="item price">
 			宝贝价格：
 			<text>{{houseInfo.price ? houseInfo.price + '元' : '面议'}}</text>
 		</view>
 		<view class="item contact">联系人：{{houseInfo.owner || '暂无'}}</view>
 		<view class="item phone">
-			<button class="btn phoneBtn" bindtap="getUserProfile">立即咨询</button>
+			<button class="btn phoneBtn" bindtap="showVideo">立即咨询</button>
 			<!-- <button -->
 			<!-- class="phoneBtn" -->
 			<!-- open-type="getPhoneNumber" -->
@@ -38,9 +42,13 @@
 			<button bindtap="handleStatus" class="btn handleStatus" wx:if="{{isToAudit === '1'}}">
 				通过
 			</button>
+			<button bindtap="handleStatus" class="btn handleStatus" wx:if="{{houseInfo.openId === openId}}">
+				修改
+			</button>
 			<button bindtap="handleDel" class="btn handleDel" wx:if="{{isDelBtn || houseInfo.openId === openId}}">
 				删除
 			</button>
+			
 		</view>
 	</view>
 	<!-- <ad unit-id="adunit-7c0f4877c3c466a6" ad-type="video" ad-theme="white" /> -->

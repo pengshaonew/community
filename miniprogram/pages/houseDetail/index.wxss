@@ -1,11 +1,12 @@
 /* pages/houseDetail/index.wxss */
 
 
-swiper{
-    height:564rpx;
-    background:black;
+swiper {
+    height: 564rpx;
+    background: black;
 }
-.maninUrl { 
+
+.maninUrl {
     width: 100%;
 }
 
@@ -15,36 +16,51 @@ swiper{
     margin-top: 20rpx;
 }
 
-.title {
-    font-size: 36rpx;
-    color: #333;
-    min-height: 64rpx;
-    display: flex;
-    align-items: center;
-    margin-bottom: 20rpx;
-}
-
 .item {
     font-size: 28rpx;
     color: #676565;
     margin-bottom: 20rpx;
 }
 
-.item text{
+.title {
+    font-size: 36rpx;
+    font-weight: bold;
+    color: #333;
+    min-height: 64rpx;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10rpx;
+}
+
+.time {
+    text-align: right;
+    font-size: 24rpx;
+}
+
+rich-text {
+    font-size: 28rpx;
+    color: #333;
+}
+
+.item.price {
+    margin-top: 10rpx;
+}
+
+.item text {
     color: red;
 }
 
 .phone {
     display: flex;
-        flex-direction: column;
+    flex-direction: column;
     align-items: center;
 }
 
-.btn{
+.btn {
     color: #fff;
     width: 368rpx;
     height: 80rpx;
-    font-size:32rpx;
+    font-size: 32rpx;
     border-radius: 8rpx;
     font-weight: bold;
     display: flex;
@@ -58,8 +74,9 @@ swiper{
 }
 
 .handleDel {
-    background:red;
+    background: red;
 }
-.handleStatus{
+
+.handleStatus {
     background: #0d9bff;
 }

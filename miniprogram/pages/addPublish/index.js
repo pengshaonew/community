@@ -9,7 +9,15 @@ Page({
      * 页面的初始数据
      */
     data: {
-        imgList: []
+        imgList: [],
+        formats: {},
+        readOnly: false,
+        placeholder: '请描述详细内容...',
+        editorHeight: 300,
+        keyboardHeight: 0,
+        isIOS: false,
+        publishContent: '',
+        publishContentNew: ''
     },
 
     /**
@@ -25,8 +33,16 @@ Page({
     onReady: function () {
 
     },
+    onStatusChange(e) {
+        const formats = e.detail
+        console.log('formats: ', formats);
+        this.setData({ formats })
+    },
+    editComplate(e) {
+        this.setData({ publishContentNew: e.detail.html });
+    },
     handleSubmit(e) {
-        const {imgList} = this.data;
+        const { imgList,publishContentNew } = this.data;
         let values = e.detail.value;
         if (!wx.getStorageSync('openId')) {
             wx.showToast({
@@ -34,16 +50,16 @@ Page({
                 icon: 'none'
             })
         }
-        // if (!values.roomNumber) {
-        //     wx.showToast({
-        //         title: '请输入房间号',
-        //         icon: 'none'
-        //     });
-        //     return;
-        // }
-        if (!values.title) {
+        if(!values.title){
             wx.showToast({
-                title: '请输入发布信息的标题',
+                title: '请输入标题',
+                icon: 'none'
+            });
+            return;
+        }
+        if (!publishContentNew.replace(/<[^>]*?>/g, '')) {
+            wx.showToast({
+                title: '请输入对宝贝的描述',
                 icon: 'none'
             });
             return;
@@ -70,7 +86,7 @@ Page({
             return;
         }
         values.price = values.price || '面议';
-        values.title = values.title.replace(/1[3-9]\d{9}/, '');
+        values.title = publishContentNew.replace(/1[3-9]\d{9}/, '');
         sellList.add({
             data: {
                 ...values,

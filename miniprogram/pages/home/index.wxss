@@ -64,7 +64,7 @@ page {
     user-select: none;
 }
 
-.listItem_L > image {
+.listItem_L>image {
     width: 100%;
     max-height: 100%;
     border-radius: 6rpx;
@@ -77,6 +77,7 @@ page {
 
 .listItem_R_title {
     font-size: 28rpx;
+    font-weight: bold;
     color: #3a3a3a;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -91,8 +92,17 @@ page {
 }
 
 .listItem_R_price {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text1 {
     font-size: 24rpx;
     color: red;
+}
+
+.text2{
+    font-size:24rpx;
 }
 
 .other {
@@ -110,17 +120,18 @@ page {
     height: 360rpx;
 }
 
-scroll-view{
+scroll-view {
     height: calc(100% - 220rpx);
 }
 
-.header{
+.header {
     background: #1a8ae2;
     padding: 20rpx 10rpx;
     display: flex;
     align-items: center;
 }
-.header input{
+
+.header input {
     background: #fff;
     width: 400rpx;
     border-radius: 32rpx;
@@ -129,6 +140,7 @@ scroll-view{
     margin-left: 20rpx;
     height: 64rpx;
 }
-.header .city{
+
+.header .city {
     color: #fff;
 }
