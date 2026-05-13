@@ -89,6 +89,12 @@ Page({
             }
         }).catch(console.error)
     },
+    handleUpdate(){
+        const {houseInfo} = this.data;
+        wx.navigateTo({
+            url: '/pages/addPublish/index?id=' + houseInfo?._id
+        })
+    },
     handleDel() {
         const {houseInfo} = this.data;
         let id = houseInfo._id;

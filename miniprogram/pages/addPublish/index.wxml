@@ -11,6 +11,7 @@
             <textarea
               class="weui-textarea"
               placeholder="请输入标题"
+              model:value="{{houseInfo.title}}"
               name="title" />
           </view>
         </view>
@@ -27,6 +28,7 @@
                 bindstatuschange="onStatusChange"
                 bindinput="editComplate"
                 read-only='{{false}}'
+                bindready="onEditorReady"
               >
               </editor>
             </view>
@@ -65,6 +67,7 @@
             <input
               class="weui-input"
               placeholder="宝贝价格"
+              model:value="{{houseInfo.price}}"
               name="price" />
           </view>
         </view>
@@ -76,6 +79,7 @@
             <input
               class="weui-input"
               placeholder="联系人"
+              model:value="{{houseInfo.owner}}"
               name="owner" />
           </view>
         </view>
@@ -87,6 +91,7 @@
             <input
               class="weui-input"
               placeholder="手机号"
+              model:value="{{houseInfo.phone}}"
               name="phone"
               type="number" />
           </view>

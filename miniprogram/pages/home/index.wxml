@@ -1,7 +1,7 @@
 <!--banner部分-->
 <!-- <ad unit-id="adunit-495d169b959bbd96" /> -->
 <view class="header">
-  <picker
+  <!-- <picker
     wx:if="{{!!city}}"
     class="city"
     mode="region"
@@ -10,7 +10,8 @@
     level="city"
   >
     <text>{{city}}</text>
-  </picker>
+  </picker> -->
+   <text class='city'>{{city}}</text>
   <input
     class="weui-input"
     placeholder="请输入查询内容"

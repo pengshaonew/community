@@ -5,5 +5,4 @@
 }
 .emptyData image{
     width:240rpx;
-    height:360rpx;
 }

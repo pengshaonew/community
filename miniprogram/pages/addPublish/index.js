@@ -17,6 +17,8 @@ Page({
         keyboardHeight: 0,
         isIOS: false,
         publishContent: '',
+        houseInfo: {},
+        editorCtx: null,
         publishContentNew: ''
     },
 
@@ -24,7 +26,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        if (options?.id) {
+            this.getSellData(options.id);
+        }
     },
 
     /**
@@ -33,16 +37,50 @@ Page({
     onReady: function () {
 
     },
+    getSellData: function (id) {
+        sellList.where({
+            _id: _.eq(id)
+        }).get().then(res => {
+            const data = res?.data[0] || {};
+            this.setData({
+                houseInfo: data,
+                imgList: data.imgList
+            })
+            const { editorCtx} = this.data;
+
+            if (editorCtx) {
+                editorCtx.setContents({
+                    html: data.desc, // 传入你要设置的HTML字符串
+                    success: (res) => {
+                        console.log('内容设置成功', res);
+                    },
+                    fail: (err) => {
+                        console.error('内容设置失败', err);
+                    }
+                });
+            } else {
+                console.error('编辑器上下文尚未初始化完成');
+            }
+        })
+    },
+    // 1. 编辑器初始化完成时触发，获取上下文
+    onEditorReady() {
+        const that = this;
+        // 使用 SelectorQuery 获取 editor 组件的上下文
+        wx.createSelectorQuery().select('#editor').context(function (res) {
+            that.data.editorCtx = res.context;
+            console.log('编辑器初始化完成，上下文获取成功');
+        }).exec();
+    },
     onStatusChange(e) {
         const formats = e.detail
-        console.log('formats: ', formats);
         this.setData({ formats })
     },
     editComplate(e) {
         this.setData({ publishContentNew: e.detail.html });
     },
     handleSubmit(e) {
-        const { imgList,publishContentNew } = this.data;
+        const { imgList, publishContentNew } = this.data;
         let values = e.detail.value;
         if (!wx.getStorageSync('openId')) {
             wx.showToast({
@@ -50,7 +88,7 @@ Page({
                 icon: 'none'
             })
         }
-        if(!values.title){
+        if (!values.title) {
             wx.showToast({
                 title: '请输入标题',
                 icon: 'none'

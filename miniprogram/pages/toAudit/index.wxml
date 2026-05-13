@@ -11,5 +11,5 @@
 </view>
 
 <view wx:if="{{!dataList.length}}" class="emptyData">
-    <image src='../../images/notAvailable.png' />
+    <image src='../../images/notAvailable.png' mode="aspectFit" />
 </view>

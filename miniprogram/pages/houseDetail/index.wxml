@@ -29,7 +29,8 @@
 		</view>
 		<view class="item contact">联系人：{{houseInfo.owner || '暂无'}}</view>
 		<view class="item phone">
-			<button class="btn phoneBtn" bindtap="showVideo">立即咨询</button>
+			<button class="btn phoneBtn" bindtap="getPhoneNumber">立即咨询</button>
+			<!-- <button class="btn phoneBtn" bindtap="showVideo">立即咨询</button> -->
 			<!-- <button -->
 			<!-- class="phoneBtn" -->
 			<!-- open-type="getPhoneNumber" -->
@@ -42,7 +43,7 @@
 			<button bindtap="handleStatus" class="btn handleStatus" wx:if="{{isToAudit === '1'}}">
 				通过
 			</button>
-			<button bindtap="handleStatus" class="btn handleStatus" wx:if="{{houseInfo.openId === openId}}">
+			<button bindtap="handleUpdate" class="btn handleStatus" wx:if="{{houseInfo.openId === openId}}">
 				修改
 			</button>
 			<button bindtap="handleDel" class="btn handleDel" wx:if="{{isDelBtn || houseInfo.openId === openId}}">
