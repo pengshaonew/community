@@ -128,7 +128,7 @@ scroll-view {
 }
 
 .header {
-    background: #1a8ae2;
+    background: #05c494;
     padding: 20rpx 10rpx;
     display: flex;
     align-items: center;

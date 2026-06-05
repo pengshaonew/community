@@ -1,0 +1,62 @@
+/* custom-tab-bar/index.whtml.wxss */
+.tab-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px; /* 底部栏高度 */
+    background: white;
+    display: flex;
+    padding-bottom: env(safe-area-inset-bottom); /* 适配 iPhone X 底部黑条 */
+    border-top: 1rpx solid #e5e5e5;
+    z-index: 999;
+  }
+  
+  .tab-bar-item {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  /* 中间发布按钮的特殊样式 */
+  .center-item {
+    /* 不需要文字，只需要放那个大圆按钮 */
+  }
+  
+  .publish-btn {
+    width: 60px;
+    height: 60px;
+    background-color: #07c160; /* 绿色背景 */
+    border-radius: 50%;
+    /* 关键代码：向上偏移，实现一半在上一半在下 */
+    margin-top: -35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* 加点阴影更有立体感 */
+    color: #fff;
+  }
+  
+  .add-icon {
+    width: 30px;
+    height: 30px;
+    filter: brightness(0) invert(1); /* 把图标变白 */
+  }
+  
+  .icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 2px;
+  }
+  
+  .text {
+    font-size: 10px;
+    color: #999;
+  }
+  
+  .active {
+    color: #07c160;
+  }

@@ -1,0 +1,22 @@
+<!--custom-tab-bar/index.whtml.wxml-->
+<view class="tab-bar">
+  <!-- 左侧：首页 -->
+  <view class="tab-bar-item" bindtap="switchTab" data-path="/pages/home/index"  data-selected='{{0}}'>
+    <image src="{{selected === 0 ? '/images/tab/homeIconS.png' : '/images/tab/homeIconD.png'}}" class="icon"></image>
+    <text class="text {{selected === 0 ? 'active' : ''}}">首页</text>
+  </view>
+
+  <!-- 中间：发布按钮 (凸起部分) -->
+  <view class="tab-bar-item center-item" bindtap="goPublish">
+    <view class="publish-btn">
+      <!-- <image src="/images/add.png" class="add-icon"></image> -->
+      <text>发布</text>
+    </view>
+  </view>
+
+  <!-- 右侧：我的 -->
+  <view class="tab-bar-item" bindtap="switchTab" data-path="/pages/userInfo/index" data-selected='{{2}}'>
+    <image src="{{selected === 2 ? '/images/tab/myIconS.png' : '/images/tab/myIconD.png'}}" class="icon"></image>
+    <text class="text {{selected === 2 ? 'active' : ''}}">我的</text>
+  </view>
+</view>

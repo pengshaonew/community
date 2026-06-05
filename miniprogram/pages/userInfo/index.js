@@ -19,7 +19,14 @@ Page({
         isToAudit: false,
         canIUseGetUserProfile: false
     },
-
+    onShow() {
+        // 获取自定义 tabBar 组件实例并更新选中状态
+        if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+            this.getTabBar().setData({
+                selected: 2
+            });
+        }
+    },
     /**
      * 生命周期函数--监听页面加载
      */
