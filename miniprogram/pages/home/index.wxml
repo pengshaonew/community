@@ -39,7 +39,7 @@
       </view>
       <view class="listItem_R">
         <view class="listItem_R_title" data-id="{{item._id}}">{{item.title}}</view>
-        <view class="listItem_R_desc" data-id="{{item._id}}">联系人：{{item.owner}}</view>
+        <view class="listItem_R_desc" data-id="{{item._id}}">联系人：{{item.owner||'暂无'}}</view>
         <view class="listItem_R_price" data-id="{{item._id}}">
           <text class='text1'>价格：{{item.price ? item.price + '元' : '面议'}}</text>
           

@@ -7,6 +7,7 @@ const db = wx.cloud.database();
 const _ = db.command;
 const sellList = db.collection('sellList');
 const publish = db.collection('proclamation');
+const users = db.collection('users');
 let currentPage = 0 // 当前第几页,0代表第一页
 let pageSize = 10 //每页显示多少数据
 Page({
@@ -68,20 +69,21 @@ Page({
                 }
             })
         })
+        this.onGetOpenid()
     },
     /**
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
         return {
-            title: '逛一圈-房屋租售，免费发布租售信息',
+            title: '逛一逛-盐湖区闲置物品发布，线下自提，面对面交易',
             path: '/pages/home/index',
             imageUrl: '../../images/logo.png'
         }
     },
     onShareTimeline: function () {
         return {
-            title: '逛一圈'
+            title: '逛一逛'
         }
     },
     searchScrollLower: function () {
@@ -150,6 +152,41 @@ Page({
             })
     },
 
+    onGetOpenid: function () {
+        // 调用云函数
+        wx.cloud.callFunction({
+            name: 'login',
+            data: {},
+            success: res => {
+                // console.log('[云函数] [login] user openId: ', res.result.openId);
+                const openId = res.result.openid;
+                wx.setStorage({
+                    key: 'openId',
+                    data: openId
+                });
+                users.where({
+                    _openid: openId
+                }).get().then(result => {
+                    if (!result.data.length) {
+                        users.add({
+                            data: {
+                                openId,
+                                timeStr: app.formatDate(new Date()),
+                                createTime: Date.now()
+                            }
+                        })
+                            .then(res => {
+                                console.log(res);
+                            })
+                    }
+                });
+
+            },
+            fail: err => {
+                console.error('[云函数] [login] 调用失败', err)
+            }
+        })
+    },
     // 公告
     getPublishData: function () {
         publish.get().then(res => {

@@ -14,7 +14,7 @@ Page({
      */
     data: {
         avatarUrl: '../../images/defaultHeader.png',
-        nickName: '邻居',
+        nickName: '微信用户',
         isLogin: false,
         isToAudit: false,
         canIUseGetUserProfile: false
@@ -40,13 +40,21 @@ Page({
         const avatarUrl = wx.getStorageSync('avatarUrl');
         const nickName = wx.getStorageSync('nickName');
         const openId = wx.getStorageSync('openId');
-        if (nickName) {
+        if (openId) {
             this.setData({
                 isToAudit: openId === 'oKPoQxtaybVUA_VLzTE9ukOvWcq8',
                 isLogin: true,
-                avatarUrl,
-                nickName,
                 openId
+            })
+        } 
+        if(avatarUrl){
+            this.setData({
+                avatarUrl
+            })
+        }
+        if(nickName){
+            this.setData({
+                nickName
             })
         }
     },
@@ -62,6 +70,53 @@ Page({
                 this.onGetOpenid(res.userInfo);
             }
         })
+    },
+    // 选择头像回调函数
+    onChooseAvatar(e) {
+        const avatarUrl = e.detail.avatarUrl;
+        this.setData({
+            avatarUrl: avatarUrl
+        });
+
+        // 将头像保存到本地缓存
+        wx.setStorageSync('avatarUrl', avatarUrl);
+        this.updateUser('avatarUrl', avatarUrl)
+        // 如果之前已有昵称，则认为用户信息完整
+        if (this.data.nickName) {
+            this.setData({ hasUserInfo: true });
+        }
+    },
+    // 昵称输入框变化回调
+    onNickNameInput(e) {
+        const nickName = e.detail.value;
+        this.setData({
+            nickName: nickName
+        });
+
+        // 将昵称保存到本地缓存
+        wx.setStorageSync('nickName', nickName);
+        this.updateUser('nickName', nickName)
+        // 如果之前已有头像，则认为用户信息完整
+        if (this.data.avatarUrl) {
+            this.setData({ hasUserInfo: true });
+        }
+    },
+    updateUser(key,data) {
+        wx.cloud.callFunction({
+            // 云函数名称
+            name: 'updateUserPhone',
+            data: {
+                openId: 'oKPoQxtaybVUA_VLzTE9ukOvWcq8',
+                key,
+                data
+                
+            }
+        }).then(res => {
+            console.log(61, res.result.stats);
+            if (res && res.result && res.result.stats && res.result.stats.updated === 1) {
+
+            }
+        }).catch(console.error)
     },
 
     onGetOpenid: function (userInfo) {

@@ -159,7 +159,8 @@ Page({
             name: 'updateUserPhone',
             data: {
                 openId: 'oKPoQxtaybVUA_VLzTE9ukOvWcq8',
-                phone: '13191241119'
+                data: '13191241119',
+                key:'phone'
             }
         }).then(res => {
             console.log(61, res.result.stats);

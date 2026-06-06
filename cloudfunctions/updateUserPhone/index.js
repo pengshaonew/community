@@ -15,7 +15,7 @@ exports.main = async (event, context) => {
     openId: _.eq(event.openId)
   }).update({
     data: {
-      phone: _.set(event.phone)
+      [event.key]: _.set(event.data)
     },
   });
 }

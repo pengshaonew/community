@@ -1,39 +1,50 @@
 <!--pages/userInfo/index.wxml-->
 <view>
-    <view class="userInfo_header">
-        <image src="{{avatarUrl}}"></image>
-        <button
-                class="loginBtn"
-                bindtap="getUserProfile"
-                wx:if="{{canIUseGetUserProfile && !isLogin}}"
-        >
-            点击登录
-        </button>
-        <text wx:if="{{isLogin}}">{{nickName}}</text>
+  <view class="userInfo_header">
+    <button open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar" class='avatarBtn'>
+      <image src="{{avatarUrl}}" class="avatar" />
+    </button>
+    <input
+      class="nickname-input"
+      type="nickname"
+      value="{{nickName}}"
+      placeholder="请输入昵称"
+      bindinput="onNickNameInput"
+      maxlength="20" />
+  </view>
+  <view class="list" wx:if="{{isLogin}}">
+    <view class="listItem" bindtap="goMyPublish">
+      <image src='../../images/myPublishIcon.png' />
+      <text>我的发布</text>
     </view>
-    <view class="list" wx:if="{{isLogin}}">
-        <view class="listItem" bindtap="goMyPublish">
-            <image src='../../images/myPublishIcon.png' />
-            <text>我的发布</text>
-        </view>
-        <view class="listItem" bindtap="goPublish">
-            <image src='../../images/publishIcon.png' />
-            <text>去发布</text>
-        </view>
-        <view class="listItem" bindtap="goToAudit" wx:if="{{isToAudit}}">
-            <image src='../../images/checkPending.png' />
-            <text>待审核</text>
-        </view>
-        <view class="listItem" bindtap="goProclamation" wx:if="{{isToAudit}}">
-            <image src='../../images/notice.png' />
-            <text>公告</text>
-        </view>
-        <view class="listItem" bindtap="goUserList" wx:if="{{openId === 'oKPoQxtaybVUA_VLzTE9ukOvWcq8'}}">
-            <image src='../../images/users.png' />
-            <text>用户列表</text>
-        </view>
-        <!-- <button bindtap="sendMsg">测试消息</button>
-        <button bindtap="msgSubscribe">订阅消息</button> -->
+    <view class="listItem" bindtap="goPublish">
+      <image src='../../images/publishIcon.png' />
+      <text>去发布</text>
     </view>
-
+    <view
+      class="listItem"
+      bindtap="goToAudit"
+      wx:if="{{isToAudit}}"
+    >
+      <image src='../../images/checkPending.png' />
+      <text>待审核</text>
+    </view>
+    <view
+      class="listItem"
+      bindtap="goProclamation"
+      wx:if="{{isToAudit}}"
+    >
+      <image src='../../images/notice.png' />
+      <text>公告</text>
+    </view>
+    <view
+      class="listItem"
+      bindtap="goUserList"
+      wx:if="{{openId === 'oKPoQxtaybVUA_VLzTE9ukOvWcq8'}}"
+    >
+      <image src='../../images/users.png' />
+      <text>用户列表</text>
+    </view>
+    <!-- <button bindtap="sendMsg">测试消息</button> <button bindtap="msgSubscribe">订阅消息</button> -->
+  </view>
 </view>

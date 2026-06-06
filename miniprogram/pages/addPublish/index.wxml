@@ -9,7 +9,7 @@
           </view>
           <view class="weui-cell__bd">
             <textarea
-              class="weui-textarea"
+              class="weui-textarea title"
               placeholder="请输入标题"
               model:value="{{houseInfo.title}}"
               name="title" />

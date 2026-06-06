@@ -7,7 +7,10 @@
     margin-bottom: 20rpx;
     padding: 0 40rpx;
 }
-
+.userInfo_header .avatarBtn{
+    width: auto;
+    padding: 0;
+}
 .userInfo_header image {
     width: 120rpx;
     height: 120rpx;
@@ -19,6 +22,15 @@
     color: #333;
     margin-left: 20rpx;
 }
+
+.nickname-input {
+    flex: 1;
+    padding: 20rpx;
+    /* border: 1rpx solid #ddd; */
+    border-radius: 10rpx;
+    font-size: 28rpx;
+    /* background-color: #f9f9f9; */
+  }
 
 .listItem {
     height: 100rpx;

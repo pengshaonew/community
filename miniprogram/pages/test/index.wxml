@@ -1,7 +1,7 @@
 <!--pages/test/index.wxml-->
         <!--    <text>当前所在城市：{{city}}</text>-->
         <!--    <button bindtap="updateList">更新</button>-->
-        <!--    <button bindtap="updateUser">updateUserPhone</button>-->
+           <button bindtap="updateUser">updateUserPhone</button>
         <!--    <button-->
         <!--            class="phoneBtn"-->
         <!--            open-type="getPhoneNumber"-->

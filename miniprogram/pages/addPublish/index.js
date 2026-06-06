@@ -109,13 +109,13 @@ Page({
         //     });
         //     return;
         // }
-        if (!values.owner) {
-            wx.showToast({
-                title: '请输入联系人',
-                icon: 'none'
-            });
-            return;
-        }
+        // if (!values.owner) {
+        //     wx.showToast({
+        //         title: '请输入联系人',
+        //         icon: 'none'
+        //     });
+        //     return;
+        // }
         if (!/^1[3-9]\d{9}$/.test(values.phone)) {
             wx.showToast({
                 title: '联系方式有误,请检查确认',
@@ -124,10 +124,11 @@ Page({
             return;
         }
         values.price = values.price || '面议';
-        values.title = publishContentNew.replace(/1[3-9]\d{9}/, '');
+        values.title = values.title.replace(/1[3-9]\d{9}/, '');
         sellList.add({
             data: {
                 ...values,
+                desc:publishContentNew,
                 imgList,
                 createTime: Date.now(),
                 timeStr: app.formatDate(new Date()),
@@ -135,7 +136,7 @@ Page({
                 openId: wx.getStorageSync('openId'),
                 nickName: wx.getStorageSync('nickName'),
                 avatarUrl: wx.getStorageSync('avatarUrl'),
-                city: wx.getStorageSync('city') || '运城'
+                city: wx.getStorageSync('city') || '运城市'
             }
         })
             .then(res => {
