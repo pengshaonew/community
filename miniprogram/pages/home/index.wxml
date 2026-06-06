@@ -1,17 +1,8 @@
 <!--banner部分-->
 <!-- <ad unit-id="adunit-495d169b959bbd96" /> -->
 <view class="header">
-  <!-- <picker
-    wx:if="{{!!city}}"
-    class="city"
-    mode="region"
-    bindchange="bindRegionChange"
-    value="{{region}}"
-    level="city"
-  >
-    <text>{{city}}</text>
-  </picker> -->
-   <text class='city'>{{city}}</text>
+  <!-- <picker wx:if="{{!!city}}" class="city" mode="region" bindchange="bindRegionChange" value="{{region}}" level="city" > <text>{{city}}</text> </picker> -->
+  <text class='city'>{{city}}</text>
   <input
     class="weui-input"
     placeholder="请输入查询内容"
@@ -27,6 +18,10 @@
   scroll-y="true"
   wx:if="{{navIndex==='0'}}"
   bindscrolltolower="searchScrollLower"
+  refresher-enabled="true"
+  refresher-triggered="{{refresherTriggered}}"
+  bindrefresherpulling="onRefresherPulling"
+  bindrefresherrefresh="onRefresherRefresh"
 >
   <block wx:for="{{dataList}}" wx:key="_id">
     <view
@@ -42,13 +37,11 @@
         <view class="listItem_R_desc" data-id="{{item._id}}">联系人：{{item.owner||'暂无'}}</view>
         <view class="listItem_R_price" data-id="{{item._id}}">
           <text class='text1'>价格：{{item.price ? item.price + '元' : '面议'}}</text>
-          
         </view>
       </view>
     </view>
   </block>
   <view class="loading" hidden="{{!loadMore}}">正在载入更多...</view>
-  <!-- <view class="loading" hidden="{{!loadAll}}">已加载全部数据</view> -->
 </scroll-view>
 <view wx:if="{{navIndex === '2'}}" class="other">
   <rich-text nodes="{{publishContent}}">
