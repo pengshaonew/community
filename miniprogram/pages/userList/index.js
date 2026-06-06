@@ -47,7 +47,7 @@ Page({
             })
         }
         users.where({
-            openId: _.neq('oxRJz5TIAWcLxkbJGq1grap0ZpPk')
+            openId: _.neq('oKPoQxtaybVUA_VLzTE9ukOvWcq8')
         }).skip(users_currentPage * users_pageSize) //从第几个数据开始
             .limit(users_pageSize).get().then(res => {
                 if (res.data && res.data.length > 0) {

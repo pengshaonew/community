@@ -13,10 +13,11 @@ Page({
      * 页面的初始数据
      */
     data: {
+        hasShared: false, // 标记是否已分享
         isToAudit: null,
         houseInfo: {},
         openId: null,
-        phone:null
+        phone: null
     },
 
     onLoad: function (option) {
@@ -26,7 +27,7 @@ Page({
             openId,
             phone,
             isToAudit: option.isToAudit,
-            isDelBtn: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk'
+            isDelBtn: openId === 'oKPoQxtaybVUA_VLzTE9ukOvWcq8'
         })
         this.getSellData(option.id);
 
@@ -35,9 +36,9 @@ Page({
             videoAd = wx.createRewardedVideoAd({
                 adUnitId: 'adunit-900a7ad3b047777b'
             })
-            videoAd.onLoad(() => {})
-            videoAd.onError((err) => {})
-            videoAd.onClose((res) => {})
+            videoAd.onLoad(() => { })
+            videoAd.onError((err) => { })
+            videoAd.onClose((res) => { })
         }
         // 用户触发广告后，显示激励视频广告
         if (videoAd) {
@@ -58,9 +59,18 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-        const {houseInfo} = this.data;
+        // 设置状态为已分享
+        this.setData({
+            hasShared: true
+        });
+
+        // 可选：分享后立刻自动拨打电话
+        setTimeout(() => {
+          this.makePhoneCall();
+        }, 500); 
+        const { houseInfo } = this.data;
         return {
-            title: houseInfo.title + ' —— 逛一圈-房屋租售,免费发布租售信息',
+            title: houseInfo.title + ' 盐湖区闲置物品发布，线下自提，面对面交易',
             path: '/pages/houseDetail/index?id=' + houseInfo._id,
             imageUrl: houseInfo.imgList && houseInfo.imgList[0] ? houseInfo.imgList[0] : '../../images/logo.png'
         }
@@ -71,7 +81,7 @@ Page({
         }
     },
     handleStatus() {
-        const {houseInfo} = this.data;
+        const { houseInfo } = this.data;
         let id = houseInfo._id;
         wx.cloud.callFunction({
             // 云函数名称
@@ -89,14 +99,14 @@ Page({
             }
         }).catch(console.error)
     },
-    handleUpdate(){
-        const {houseInfo} = this.data;
+    handleUpdate() {
+        const { houseInfo } = this.data;
         wx.navigateTo({
             url: '/pages/addPublish/index?id=' + houseInfo?._id
         })
     },
     handleDel() {
-        const {houseInfo} = this.data;
+        const { houseInfo } = this.data;
         let id = houseInfo._id;
         if (houseInfo.imgList) {
             wx.cloud.deleteFile({
@@ -143,7 +153,34 @@ Page({
     },
     getUserProfile: function (e) {
         if (this.data.openId) {
-            this.callPhone();
+            if (this.data.hasShared) {
+                // 如果已经分享过，直接打电话
+                this.callPhone();
+            } else {
+                // 如果没分享过，提示用户分享
+                wx.showModal({
+                    title: '独乐乐不如众乐乐',
+                    content: '好东西值得被更多人看到！分享给朋友，顺便查看卖家电话吧',
+                    confirmText: '去分享',
+                    cancelText: '取消',
+                    success: (res) => {
+                        if (res.confirm) {
+                            // 用户点击“去分享”，此时无法直接调起分享面板，
+                            // 通常做法是引导点击右上角菜单，或者利用 Button 的 open-type="share"
+                            // 这里演示通过隐藏按钮触发原生分享菜单的技巧（需配合WXML中的share按钮）
+                            // 或者简单提示用户点击右上角转发
+                            wx.showToast({
+                                title: '请点击右上角转发给朋友',
+                                icon: 'none',
+                                duration: 2000
+                            });
+
+                            // 技巧：有些开发者会在这里放置一个透明的 share 按钮覆盖，
+                            // 但最稳妥的是提示用户手动转发，转发回来后再次点击即可。
+                        }
+                    }
+                });
+            }
         } else {
             wx.getUserProfile({
                 desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
@@ -157,6 +194,7 @@ Page({
             })
         }
     },
+ 
     getPhoneNumber: function (e) {
         console.log(e.detail);
         wx.cloud.callFunction({
@@ -170,7 +208,7 @@ Page({
             let phone = res.result.list[0].data.phoneNumber;
             if (phone) {
                 wx.setStorageSync('phone', phone);
-                this.setData({phone});
+                this.setData({ phone });
                 intentionUsers.where({
                     phone: _.eq(phone)
                 }).get().then(result => {
@@ -184,12 +222,12 @@ Page({
                         }).then(res => {
                             this.callPhone();
                         })
-                    }else{
+                    } else {
                         this.callPhone();
                     }
                 });
                 const openId = wx.getStorageSync('openId');
-                if(openId){
+                if (openId) {
                     wx.cloud.callFunction({
                         // 云函数名称
                         name: 'updateUserPhone',
@@ -232,7 +270,7 @@ Page({
                 this.callPhone();
                 this.setData({
                     openId,
-                    isDelBtn: openId === 'oxRJz5TIAWcLxkbJGq1grap0ZpPk'
+                    isDelBtn: openId === 'oKPoQxtaybVUA_VLzTE9ukOvWcq8'
                 });
                 users.where({
                     _openid: _.neq(openId)
@@ -257,7 +295,7 @@ Page({
             }
         })
     },
-    seeMaxImg(e){
+    seeMaxImg(e) {
         const src = e.currentTarget.dataset.src;//获取data-src
         //图片预览
         wx.previewImage({
@@ -265,8 +303,8 @@ Page({
             urls: this.data.houseInfo.imgList // 需要预览的图片http链接列表
         })
     },
-    showVideo(){
-        if(videoAd){
+    showVideo() {
+        if (videoAd) {
 
             videoAd.show().catch(() => {
                 // 失败重试
