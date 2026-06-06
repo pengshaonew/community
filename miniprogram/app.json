@@ -45,7 +45,7 @@
     "sitemapLocation": "sitemap.json",
     "style": "v2",
     "requiredPrivateInfos": [
-        "getFuzzyLocation"
+        
     ],
     "permission": {
         "scope.userFuzzyLocation": {
